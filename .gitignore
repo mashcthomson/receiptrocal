@@ -1,0 +1,18 @@
+node_modules/
+*.log
+.env*
+.DS_Store
+artifacts/
+
+# Local orchestration and review records stay beside the product, outside its repo history.
+/evidence/
+/reports/
+/BRIEF.md
+/PRIME-NOTES.md
+/TO-MASTER.md
+/REVIEW*.md
+/LANE-*.md
+/PLAN.md
+/CONTRACT.md
+/RULES.md
+/AGENTS.md

@@ -1,0 +1,259 @@
+[
+  {
+    "id": "paid",
+    "title": "Exact SOL payment",
+    "invoice": {
+      "id": "INV-1001",
+      "recipient": "2xuj2Z52isNFb6ftM1wnoFD9dhi9RjntX1AcZiTN8Txf",
+      "amountLamports": "1000000000",
+      "notBefore": 1791842400
+    },
+    "evidence": {
+      "source": "fixture",
+      "cluster": "devnet",
+      "signature": "d9bD1Q4o29tXKaxiUUFKqFgJvPAR5cpk2Je5ifgvoC3fDmoVBAKJMd8sLsRz33raY2AB56oUkkeLVS2cV4GmiQh",
+      "commitment": "finalized",
+      "fetchedAt": "2026-10-12T18:30:00.000Z",
+      "transaction": {
+        "slot": 400000001,
+        "blockTime": 1791842460,
+        "transaction": {
+          "signatures": [
+            "d9bD1Q4o29tXKaxiUUFKqFgJvPAR5cpk2Je5ifgvoC3fDmoVBAKJMd8sLsRz33raY2AB56oUkkeLVS2cV4GmiQh"
+          ],
+          "message": {
+            "instructions": [
+              {
+                "program": "system",
+                "programId": "11111111111111111111111111111111",
+                "parsed": {
+                  "type": "transfer",
+                  "info": {
+                    "source": "4vZJBHaKsWypdivbw6jq3WqffwK9i9kdboPWbriaKYvk",
+                    "destination": "2xuj2Z52isNFb6ftM1wnoFD9dhi9RjntX1AcZiTN8Txf",
+                    "lamports": 1000000000
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "meta": {
+          "err": null,
+          "innerInstructions": []
+        }
+      }
+    },
+    "expectedStatus": "matched"
+  },
+  {
+    "id": "underpaid",
+    "title": "Payment is one lamport short",
+    "invoice": {
+      "id": "INV-1002",
+      "recipient": "6tCsL25d2AbPgKyZvvEKhqY26JPBAT8UGK34ZFZMRqEu",
+      "amountLamports": "500000000"
+    },
+    "evidence": {
+      "source": "fixture",
+      "cluster": "devnet",
+      "signature": "2FEjmKCYmyUtmrGiEMhEQAE1o3SZ8zcQqLnJ5T9ngrvxA3C4Umb6HzLhjyUiCgGmJrAa8i86uYeSCHVGAyzdVQZv",
+      "commitment": "finalized",
+      "fetchedAt": "2026-10-12T18:30:00.000Z",
+      "transaction": {
+        "slot": 400000002,
+        "blockTime": 1791842520,
+        "transaction": {
+          "signatures": [
+            "2FEjmKCYmyUtmrGiEMhEQAE1o3SZ8zcQqLnJ5T9ngrvxA3C4Umb6HzLhjyUiCgGmJrAa8i86uYeSCHVGAyzdVQZv"
+          ],
+          "message": {
+            "instructions": [
+              {
+                "program": "system",
+                "programId": "11111111111111111111111111111111",
+                "parsed": {
+                  "type": "transfer",
+                  "info": {
+                    "source": "8qrSUkavApCxdfZ6TGGnuXPbafR9yz4xD57HAgBae3q4",
+                    "destination": "6tCsL25d2AbPgKyZvvEKhqY26JPBAT8UGK34ZFZMRqEu",
+                    "lamports": 499999999
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "meta": {
+          "err": null,
+          "innerInstructions": []
+        }
+      }
+    },
+    "expectedStatus": "mismatch"
+  },
+  {
+    "id": "wrong-recipient",
+    "title": "Payment went to another recipient",
+    "invoice": {
+      "id": "INV-1003",
+      "recipient": "AoW1dV6DKS37pGkuVtG5FjbKq1EAuv751qrBKNf1Sorf",
+      "amountLamports": "250000000"
+    },
+    "evidence": {
+      "source": "fixture",
+      "cluster": "devnet",
+      "signature": "2sKtKd12kvou2NxTkEgEr783x2wnhjpkZqrZGozYsJWiop6SG6NumKTXDknY9Fofo8LmMKaJ7U4PQbZr6rRkxCJb",
+      "commitment": "finalized",
+      "fetchedAt": "2026-10-12T18:30:00.000Z",
+      "transaction": {
+        "slot": 400000003,
+        "blockTime": 1791842580,
+        "transaction": {
+          "signatures": [
+            "2sKtKd12kvou2NxTkEgEr783x2wnhjpkZqrZGozYsJWiop6SG6NumKTXDknY9Fofo8LmMKaJ7U4PQbZr6rRkxCJb"
+          ],
+          "message": {
+            "instructions": [
+              {
+                "program": "system",
+                "programId": "11111111111111111111111111111111",
+                "parsed": {
+                  "type": "transfer",
+                  "info": {
+                    "source": "Cm9anDaujTsqrLLXQbjLjKriLx57jNRBtydSNaRw6vQk",
+                    "destination": "Eio9vuTVNzfdB5vcsLuXeL7tW3itU5iUxyrHAqHSEztq",
+                    "lamports": 250000000
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "meta": {
+          "err": null,
+          "innerInstructions": []
+        }
+      }
+    },
+    "expectedStatus": "mismatch"
+  },
+  {
+    "id": "duplicate",
+    "title": "Signature was already used",
+    "invoice": {
+      "id": "INV-1004",
+      "recipient": "2xuj2Z52isNFb6ftM1wnoFD9dhi9RjntX1AcZiTN8Txf",
+      "amountLamports": "1000000000"
+    },
+    "evidence": {
+      "source": "fixture",
+      "cluster": "devnet",
+      "signature": "d9bD1Q4o29tXKaxiUUFKqFgJvPAR5cpk2Je5ifgvoC3fDmoVBAKJMd8sLsRz33raY2AB56oUkkeLVS2cV4GmiQh",
+      "commitment": "finalized",
+      "fetchedAt": "2026-10-12T18:30:00.000Z",
+      "transaction": {
+        "slot": 400000001,
+        "blockTime": 1791842460,
+        "transaction": {
+          "signatures": [
+            "d9bD1Q4o29tXKaxiUUFKqFgJvPAR5cpk2Je5ifgvoC3fDmoVBAKJMd8sLsRz33raY2AB56oUkkeLVS2cV4GmiQh"
+          ],
+          "message": {
+            "instructions": [
+              {
+                "program": "system",
+                "programId": "11111111111111111111111111111111",
+                "parsed": {
+                  "type": "transfer",
+                  "info": {
+                    "source": "4vZJBHaKsWypdivbw6jq3WqffwK9i9kdboPWbriaKYvk",
+                    "destination": "2xuj2Z52isNFb6ftM1wnoFD9dhi9RjntX1AcZiTN8Txf",
+                    "lamports": 1000000000
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "meta": {
+          "err": null,
+          "innerInstructions": []
+        }
+      }
+    },
+    "usedSignatures": [
+      "d9bD1Q4o29tXKaxiUUFKqFgJvPAR5cpk2Je5ifgvoC3fDmoVBAKJMd8sLsRz33raY2AB56oUkkeLVS2cV4GmiQh"
+    ],
+    "expectedStatus": "duplicate"
+  },
+  {
+    "id": "failed",
+    "title": "Transaction execution failed",
+    "invoice": {
+      "id": "INV-1005",
+      "recipient": "GgRqassB4wrjB5KNxs728GGuLsdUGWJUuF5S1hmRAJd4",
+      "amountLamports": "75000000"
+    },
+    "evidence": {
+      "source": "fixture",
+      "cluster": "devnet",
+      "signature": "47WBSEbziqTnZkq2amVUTtjmydjBnwR3kK3QaUfLAqYGWS5TqvoabcZJhqhJMxctrRUAmSWiidVNntavZehRRGKX",
+      "commitment": "finalized",
+      "fetchedAt": "2026-10-12T18:30:00.000Z",
+      "transaction": {
+        "slot": 400000005,
+        "blockTime": 1791842700,
+        "transaction": {
+          "signatures": [
+            "47WBSEbziqTnZkq2amVUTtjmydjBnwR3kK3QaUfLAqYGWS5TqvoabcZJhqhJMxctrRUAmSWiidVNntavZehRRGKX"
+          ],
+          "message": {
+            "instructions": [
+              {
+                "program": "system",
+                "programId": "11111111111111111111111111111111",
+                "parsed": {
+                  "type": "transfer",
+                  "info": {
+                    "source": "Cm9anDaujTsqrLLXQbjLjKriLx57jNRBtydSNaRw6vQk",
+                    "destination": "GgRqassB4wrjB5KNxs728GGuLsdUGWJUuF5S1hmRAJd4",
+                    "lamports": 75000000
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "meta": {
+          "err": {
+            "InstructionError": [
+              0,
+              "InsufficientFunds"
+            ]
+          },
+          "innerInstructions": []
+        }
+      }
+    },
+    "expectedStatus": "mismatch"
+  },
+  {
+    "id": "unavailable",
+    "title": "Transaction is unavailable",
+    "invoice": {
+      "id": "INV-1006",
+      "recipient": "Eio9vuTVNzfdB5vcsLuXeL7tW3itU5iUxyrHAqHSEztq",
+      "amountLamports": "125000000"
+    },
+    "evidence": {
+      "source": "fixture",
+      "cluster": "devnet",
+      "signature": "4jbKzYQUfTCa4yAUksDvDu1krBH4ef3TS3BUQenwicD5wQhgXhDEjgRCzwttbmJTSFjgTwjCksKxMFdNAYxjLtCC",
+      "commitment": "finalized",
+      "fetchedAt": "2026-10-12T18:30:00.000Z",
+      "transaction": null
+    },
+    "expectedStatus": "needs_review"
+  }
+]

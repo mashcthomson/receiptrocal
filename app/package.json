@@ -1,0 +1,17 @@
+{
+  "name": "receiptrail",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node server.mjs",
+    "test": "node --test test/*.test.mjs",
+    "demo": "node cli.mjs demo",
+    "mcp": "node agent/mcp.mjs",
+    "merchant": "node agent/merchant-demo.mjs --demo",
+    "merchant:demo": "node agent/merchant-demo.mjs --demo --walkthrough"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

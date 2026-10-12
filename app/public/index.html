@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <meta name="description" content="ReceiptRail: a local, read-only desk that checks which invoice a Solana payment actually settles.">
+  <title>ReceiptRail</title>
+  <link rel="icon" href="logo.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+  <script src="app.js" type="module"></script>
+</head>
+<body data-mode="demo">
+  <a class="skip" href="#main">Skip to content</a>
+  <div class="mode-strip" aria-hidden="true"></div>
+
+  <header class="top">
+    <div class="brand">
+      <img class="brand-logo" src="logo.svg" alt="" width="36" height="36" data-logo>
+      <div>
+        <h1>ReceiptRail</h1>
+        <p class="tagline">Know which invoice a Solana payment actually settles.</p>
+      </div>
+    </div>
+    <div class="mode-badge" id="mode-badge" role="status" aria-live="polite">
+      <span class="mode-dot" aria-hidden="true"></span>
+      <span class="mode-text"><strong id="mode-title">Synthetic demo</strong><span id="mode-sub">Fixtures only. Not onchain verification.</span></span>
+    </div>
+  </header>
+
+  <nav class="tabs" role="tablist" aria-label="Mode">
+    <button class="tab" role="tab" id="tab-demo" aria-controls="panel-demo" aria-selected="true" data-mode-tab="demo">
+      <span class="tab-kicker">Demo</span>
+      <span class="tab-label">Synthetic fixtures</span>
+    </button>
+    <button class="tab" role="tab" id="tab-live" aria-controls="panel-live" aria-selected="false" tabindex="-1" data-mode-tab="live">
+      <span class="tab-kicker">Live</span>
+      <span class="tab-label">Finalized Solana RPC</span>
+    </button>
+  </nav>
+
+  <main id="main" class="layout">
+    <section class="col col-input">
+      <!-- Demo panel -->
+      <div class="panel" role="tabpanel" id="panel-demo" aria-labelledby="tab-demo">
+        <div class="banner banner-demo">
+          <strong>Synthetic demo data.</strong>
+          Every case below is an explicitly fabricated fixture. Results show how the verifier reasons; they do not prove any payment happened on Solana.
+        </div>
+        <div class="panel-head">
+          <h2>Invoice cases</h2>
+          <div class="actions">
+            <button class="btn btn-ghost" id="demo-run-all" type="button">Run all cases</button>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table class="invoices" aria-describedby="demo-caption">
+            <caption id="demo-caption" class="sr-only">Synthetic invoice fixtures. Choose a case to verify it.</caption>
+            <thead>
+              <tr>
+                <th scope="col">Case</th>
+                <th scope="col">Invoice</th>
+                <th scope="col">Recipient</th>
+                <th scope="col" class="num">Amount</th>
+                <th scope="col">Expected</th>
+                <th scope="col">Result</th>
+              </tr>
+            </thead>
+            <tbody id="demo-rows">
+              <tr><td colspan="6" class="muted">Loading demo cases...</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div id="demo-error" class="error-slot"></div>
+      </div>
+
+      <!-- Live panel -->
+      <div class="panel" role="tabpanel" id="panel-live" aria-labelledby="tab-live" hidden>
+        <div class="banner banner-live">
+          <strong>Live, read-only RPC.</strong>
+          ReceiptRail asks a public Solana RPC endpoint for the finalized transaction. It never signs, sends or holds funds. The answer is only as trustworthy as that endpoint.
+        </div>
+        <form id="live-form" class="form" novalidate>
+          <fieldset>
+            <legend>Invoice</legend>
+            <div class="field">
+              <label for="f-id">Invoice ID</label>
+              <input id="f-id" name="id" autocomplete="off" maxlength="120" required placeholder="e.g. INV-2041">
+            </div>
+            <div class="field">
+              <label for="f-recipient">Recipient address</label>
+              <input id="f-recipient" name="recipient" class="mono" autocomplete="off" spellcheck="false" required aria-describedby="f-recipient-hint">
+              <p class="hint" id="f-recipient-hint">Base58 Solana address that should receive the SOL.</p>
+            </div>
+            <div class="field-row">
+              <div class="field">
+                <label for="f-amount">Expected amount (lamports)</label>
+                <input id="f-amount" name="amountLamports" class="mono" inputmode="numeric" autocomplete="off" required aria-describedby="f-amount-hint">
+                <p class="hint" id="f-amount-hint">Whole lamports. 1 SOL = 1,000,000,000.</p>
+              </div>
+              <div class="field">
+                <label for="f-notbefore">Not before (Unix seconds, optional)</label>
+                <input id="f-notbefore" name="notBefore" class="mono" inputmode="numeric" autocomplete="off" aria-describedby="f-notbefore-hint">
+                <p class="hint" id="f-notbefore-hint">Payments earlier than this are rejected.</p>
+              </div>
+            </div>
+          </fieldset>
+          <fieldset>
+            <legend>Payment</legend>
+            <div class="field">
+              <label for="f-signature">Transaction signature</label>
+              <input id="f-signature" name="signature" class="mono" autocomplete="off" spellcheck="false" required aria-describedby="f-signature-hint">
+              <p class="hint" id="f-signature-hint">The payer's transaction signature, 64 bytes in base58.</p>
+            </div>
+            <div class="field">
+              <label for="f-cluster">Cluster</label>
+              <select id="f-cluster" name="cluster">
+                <option value="mainnet-beta">mainnet-beta</option>
+                <option value="devnet">devnet</option>
+              </select>
+            </div>
+          </fieldset>
+          <div class="form-errors" id="live-form-errors" role="alert"></div>
+          <div class="actions">
+            <button class="btn btn-primary" id="live-submit" type="submit">Verify against RPC</button>
+            <button class="btn btn-ghost" id="live-clear" type="reset">Clear</button>
+          </div>
+        </form>
+        <div id="live-error" class="error-slot"></div>
+
+        <div class="panel-head">
+          <h2>This session</h2>
+        </div>
+        <div class="table-wrap">
+          <table class="invoices">
+            <caption class="sr-only">Live checks run in this browser session.</caption>
+            <thead>
+              <tr>
+                <th scope="col">Time</th>
+                <th scope="col">Invoice</th>
+                <th scope="col">Signature</th>
+                <th scope="col">Cluster</th>
+                <th scope="col">Result</th>
+              </tr>
+            </thead>
+            <tbody id="live-rows">
+              <tr class="empty"><td colspan="5" class="muted">No live checks yet.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="col col-result" aria-labelledby="result-heading">
+      <div class="panel result-panel">
+        <div class="panel-head">
+          <h2 id="result-heading">Receipt</h2>
+        </div>
+        <div id="result" aria-live="polite">
+          <div class="placeholder">
+            <p>Choose a demo case or run a live check to inspect its receipt here.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <h2>Limitations</h2>
+    <ul id="limitations">
+      <li>SOL transfers through the System Program only. Anything else needs manual review.</li>
+      <li>Live results trust the chosen Solana RPC endpoint. They are evidence, not cryptographic proof.</li>
+      <li>Duplicate protection is local to this server and this browser session.</li>
+      <li>Not custody, tax advice or complete fraud protection.</li>
+    </ul>
+  </footer>
+</body>
+</html>
