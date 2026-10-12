@@ -20,7 +20,7 @@ The project uses Node 22 built-ins with no external npm dependencies. It holds n
 
 ## Demonstrated evidence
 
-- Final development suite: 145 tests passed, zero failures on 13-10-26. The exact timestamp and command are recorded in local `evidence/final-verification.json`. This includes the oversized MCP input regression.
+- Final development suite: 145 tests passed, zero failures on 13-10-26. The exact timestamp and command are recorded in [docs/VALIDATION.md](docs/VALIDATION.md). This includes the oversized MCP input regression.
 - CLI demo: all six synthetic cases return their expected statuses.
 - Merchant walkthrough: unpaid 402, rejected receipt 402, matching fixture 200, reused receipt on a new invoice 409.
 - Real mainnet and devnet RPC reads succeeded. These are transaction observations, not proof that a customer invoice was paid. The observed mainnet transaction contains an unsupported program and correctly requires review.

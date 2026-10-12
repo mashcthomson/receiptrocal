@@ -39,4 +39,4 @@ This is a hackathon prototype, not a production checkout or a cryptographic proo
 
 Development checks and real mainnet/devnet RPC reads were performed on 13-10-26. Formal independent review and browser inspection are requested from Master on Mac/NUC. See the local orchestration records for the current verdict; do not infer approval from passing development tests.
 
-See [runbook](docs/RUNBOOK.md), [architecture](docs/ARCHITECTURE.md), [limitations](docs/LIMITATIONS.md) and [submission pack](SUBMIT.md).
+See [validation record](docs/VALIDATION.md), [runbook](docs/RUNBOOK.md), [architecture](docs/ARCHITECTURE.md), [limitations](docs/LIMITATIONS.md) and [submission pack](SUBMIT.md).
