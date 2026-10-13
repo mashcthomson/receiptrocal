@@ -1,6 +1,6 @@
 # Submission pack
 
-Prepared 13-10-26. Track: Solana ecosystem. Local code path: `/home/mash/MASTER/hackathon-20261013`.
+Prepared 13-10-26. Track: Solana ecosystem. Code: https://github.com/mashcthomson/receiptrocal. Live: https://receiptrocal.monishc.com.au
 
 ## Paste-ready title and pitch
 
@@ -29,7 +29,7 @@ The project uses Node 22 built-ins with no external npm dependencies. It holds n
 ## Run and demo steps
 
 ```sh
-cd /home/mash/MASTER/hackathon-20261013/app
+cd receiptrocal/app
 npm test
 npm run demo
 npm run merchant:demo

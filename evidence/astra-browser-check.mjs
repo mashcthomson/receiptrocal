@@ -38,7 +38,7 @@ async function shot(name) { const r = await cdp('Page.captureScreenshot', { form
 async function layout() { return js(`(() => ({ width: innerWidth, scrollWidth: document.documentElement.scrollWidth, resultLive: document.querySelector('#result').getAttribute('aria-live'), undersized: [...document.querySelectorAll('button,input,select,summary,a')].filter(e=>e.getClientRects().length && getComputedStyle(e).visibility!=='hidden' && !e.classList.contains('skip')).map(e=>({text: e.textContent.trim().slice(0,70), width:e.getBoundingClientRect().width,height:e.getBoundingClientRect().height})).filter(e=>e.width<44 || e.height<44) }))()`); }
 const report = { startedAt: new Date().toISOString(), checks: [], layouts: [] };
 await cdp('Runtime.enable'); await cdp('Page.enable'); await cdp('Network.enable');
-await cdp('Browser.setDownloadBehavior', { behavior: 'allow', downloadPath: '/home/mash/mac/laptop-work/rr-redesign-astra/evidence', eventsEnabled: true });
+await cdp('Browser.setDownloadBehavior', { behavior: 'allow', downloadPath: new URL('.', import.meta.url).pathname, eventsEnabled: true });
 for (const [width, height] of [[1440,900],[390,844],[360,800]]) {
   await cdp('Emulation.setDeviceMetricsOverride', { width, height, deviceScaleFactor: 1, mobile: false });
   await cdp('Page.navigate', { url: origin });
