@@ -1,0 +1,128 @@
+{
+  "startedAt": "2026-10-13T05:35:59.267Z",
+  "views": [
+    {
+      "theme": "current",
+      "width": 390,
+      "layout": {
+        "width": 390,
+        "scrollWidth": 375,
+        "resultLive": "polite",
+        "undersized": []
+      },
+      "contrast": {
+        "checked": 137,
+        "failures": [],
+        "minimum": 4.58
+      },
+      "flow": {
+        "pickerTop": 2416.46875,
+        "mainBottom": 2023.171875,
+        "footerBottom": 2404.46875
+      }
+    },
+    {
+      "theme": "current",
+      "width": 360,
+      "layout": {
+        "width": 360,
+        "scrollWidth": 345,
+        "resultLive": "polite",
+        "undersized": []
+      },
+      "contrast": {
+        "checked": 137,
+        "failures": [],
+        "minimum": 4.58
+      },
+      "flow": {
+        "pickerTop": 2454.140625,
+        "mainBottom": 2044.34375,
+        "footerBottom": 2442.140625
+      }
+    },
+    {
+      "theme": "sage",
+      "width": 390,
+      "layout": {
+        "width": 390,
+        "scrollWidth": 375,
+        "resultLive": "polite",
+        "undersized": []
+      },
+      "contrast": {
+        "checked": 137,
+        "failures": [],
+        "minimum": 4.58
+      },
+      "flow": {
+        "pickerTop": 2416.46875,
+        "mainBottom": 2023.171875,
+        "footerBottom": 2404.46875
+      }
+    },
+    {
+      "theme": "sage",
+      "width": 360,
+      "layout": {
+        "width": 360,
+        "scrollWidth": 345,
+        "resultLive": "polite",
+        "undersized": []
+      },
+      "contrast": {
+        "checked": 137,
+        "failures": [],
+        "minimum": 4.58
+      },
+      "flow": {
+        "pickerTop": 2454.140625,
+        "mainBottom": 2044.34375,
+        "footerBottom": 2442.140625
+      }
+    },
+    {
+      "theme": "colosseum",
+      "width": 390,
+      "layout": {
+        "width": 390,
+        "scrollWidth": 375,
+        "resultLive": "polite",
+        "undersized": []
+      },
+      "contrast": {
+        "checked": 137,
+        "failures": [],
+        "minimum": 5.22
+      },
+      "flow": {
+        "pickerTop": 2419.15625,
+        "mainBottom": 2009.359375,
+        "footerBottom": 2407.15625
+      }
+    },
+    {
+      "theme": "colosseum",
+      "width": 360,
+      "layout": {
+        "width": 360,
+        "scrollWidth": 345,
+        "resultLive": "polite",
+        "undersized": []
+      },
+      "contrast": {
+        "checked": 137,
+        "failures": [],
+        "minimum": 5.22
+      },
+      "flow": {
+        "pickerTop": 2485.140625,
+        "mainBottom": 2075.34375,
+        "footerBottom": 2473.140625
+      }
+    }
+  ],
+  "checks": [],
+  "exceptions": [],
+  "completedAt": "2026-10-13T05:36:02.239Z"
+}

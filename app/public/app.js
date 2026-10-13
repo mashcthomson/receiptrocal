@@ -664,6 +664,41 @@ function downloadRecord(record) {
   setTimeout(() => URL.revokeObjectURL(url), 1000);
 }
 
+// ---------- colour themes ----------
+
+function initTheme() {
+  const key = 'receiptrocal.theme.v1';
+  const allowed = new Set(['current', 'sage', 'colosseum']);
+  const url = new URL(window.location.href);
+  let theme = 'current';
+  try { const saved = localStorage.getItem(key); if (allowed.has(saved)) theme = saved; } catch { /* Storage is optional. */ }
+  if (allowed.has(url.searchParams.get('theme'))) theme = url.searchParams.get('theme');
+  const frame = $('#phone-app');
+  const sendToFrame = () => frame?.contentWindow?.postMessage({ type: 'receiptrocal-theme', theme }, window.location.origin);
+  const apply = (next, remember = false) => {
+    if (!allowed.has(next)) return;
+    theme = next;
+    document.documentElement.dataset.theme = theme;
+    for (const button of document.querySelectorAll('[data-theme-choice]')) button.setAttribute('aria-pressed', String(button.dataset.themeChoice === theme));
+    if (remember) {
+      try { localStorage.setItem(key, theme); } catch { /* Still apply without persistence. */ }
+      // A deliberate selection updates a video URL without reloading its evidence.
+      const nextUrl = new URL(window.location.href);
+      if (nextUrl.searchParams.has('theme')) {
+        nextUrl.searchParams.set('theme', theme);
+        history.replaceState(null, '', nextUrl);
+      }
+    }
+    sendToFrame();
+  };
+  for (const button of document.querySelectorAll('[data-theme-choice]')) button.addEventListener('click', () => apply(button.dataset.themeChoice, true));
+  frame?.addEventListener('load', sendToFrame);
+  window.addEventListener('message', event => {
+    if (window.parent !== window && event.source === window.parent && event.origin === window.location.origin && event.data?.type === 'receiptrocal-theme') apply(event.data.theme);
+  });
+  apply(theme);
+}
+
 // ---------- website / phone preview ----------
 
 function initDisplayView() {
@@ -685,7 +720,7 @@ function initDisplayView() {
     $('#website-view').hidden = phone;
     $('#phone-preview').hidden = !phone;
     for (const button of document.querySelectorAll('[data-view]')) button.setAttribute('aria-pressed', String(button.dataset.view === view));
-    if (phone && !frame.hasAttribute('src')) frame.src = '/?embed=1';
+    if (phone && !frame.hasAttribute('src')) frame.src = '/?embed=1&theme=' + encodeURIComponent(document.documentElement.dataset.theme);
   };
   for (const button of document.querySelectorAll('[data-view]')) {
     button.addEventListener('click', () => {
@@ -702,6 +737,7 @@ function initDisplayView() {
 // ---------- boot ----------
 
 function init() {
+  initTheme();
   initDisplayView();
   document.title = PRODUCT_NAME;
   document.querySelectorAll('[data-product-name]').forEach(node => { node.textContent = PRODUCT_NAME; });
