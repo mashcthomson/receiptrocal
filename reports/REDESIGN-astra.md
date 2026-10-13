@@ -60,3 +60,60 @@ Own screenshots were captured from the running app and visually inspected:
 No physical-phone, Safari or screen-reader pass was performed. Browser checks use the installed desktop Chrome engine at the requested viewport sizes. No new genuine onchain-success claim is made. Existing limitations remain visible: SOL System Program transfers only, trusted RPC data, process/session-local replay protection, no custody and no production-security certification.
 
 Branch: `redesign-astra`. The report, own screenshots, own browser-check script/results and final test log accompany the implementation commit. Browser profile files, orchestrator evidence and the supplied brief are excluded. Preview port is **4322**. No extra agents were used. No push or publication.
+
+## Round 2, 13-10-26
+
+Final implementation and visual review completed **16:10 AEDT** on `redesign-astra`. This section supersedes round 1 where behavior changed. Reused the original UI/corpora references above, with no extended research or additional agents. Re-read the corrected order (mtime **15:54:33 AEDT**) live at **15:55:30 AEDT**. The requested bottom navigation was explicitly cancelled before implementation; the original responsive Demo/Live tabs remain.
+
+### Changes
+
+- Added the floating bottom-right **Website / Phone** segmented switch with local SVG icons, labels, `aria-pressed`, visible keyboard focus and at least 44 px touch targets. It is compact enough to leave the observed amount and lamport text readable at 1440×900.
+- Website retains the full app. Phone loads the same app from `/?embed=1` inside a centered rounded frame on the sage backdrop. At a 900 px window height the iframe viewport is exactly **390×844**. Frame height is capped by `calc(100dvh - 32px)`; at a 700 px window height the iframe is **390×644**, still 390 px wide.
+- The display choice persists in `localStorage`, protected by `try/catch`. Embedded documents ignore the remembered choice and hide their own switch/frame, preventing recursive preview loading. At widths **600 px and below**, the switch is hidden and the normal responsive app always displays, even with Phone remembered. Embedded scrollbars are hidden while scrolling remains usable.
+- Added automatic dark styling via `prefers-color-scheme`, including the SVG wordmark, controls, evidence, fixture notices and focus treatment. Dark Skip to content now uses dark text on lime. No external fonts/assets or dependencies.
+- Added the invoice → transaction → verdict workflow strip and a clear SOL verification pitch. On phones the workflow uses readable stacked rows. Phone honesty labels, case expectations and amount labels/lamports are at least 12 px. Sticky tabs mask the stray strip of content below them.
+- Desktop scenario rows align the scenario/invoice, amount and verdict. Verdict cards retain large status headings and explicit provenance. The footer contains the exact link `https://github.com/mashcthomson/receiptrocal` and **“Read-only. No wallet, no keys.”**
+
+### HTTP boundary and embedding
+
+The only accepted Host/Origin pairs are:
+
+| Host | Origin, when supplied |
+| --- | --- |
+| `127.0.0.1:<actual server port>` | `http://127.0.0.1:<actual server port>` |
+| `localhost:<actual server port>` | `http://localhost:<actual server port>` |
+| `receiptrocal.monishc.com.au` | `https://receiptrocal.monishc.com.au` |
+
+Host and Origin are compared exactly. Origin remains tied to its matching Host; the public Origin cannot authorize a loopback Host or vice versa. No forwarding header is trusted. Subdomains, lookalikes, appended ports, trailing dots, wrong schemes, unlisted hosts and invalid origins are rejected. Origin-free navigation remains supported as before.
+
+CSP now explicitly uses `frame-src 'self'`. Only a GET of the root document with `embed=1` changes `frame-ancestors` to `'self'`; the ordinary page, other query values and API routes retain `'none'`. No arbitrary frame origins are allowed. The server still binds loopback, and RPC/core verification semantics are unchanged.
+
+Added real HTTP boundary tests using explicit Host headers, including a truly empty Host with Node's `setHost: false`. Tests exercise accepted public and loopback requests, rejected Host/Origin combinations, ignored forwarding headers, successful `/?embed=1` serving and the narrow CSP exception.
+
+### Validation and evidence
+
+- **175 tests passed, 0 failed**. [Round 2 test log](../evidence/astra-round2-tests.log), written **16:03:14 AEDT**, includes all 145 original tests plus the new boundary cases. Subsequent product changes were the bounded CSS/readability refinements and the embed root styling marker; final browser checks cover those changes.
+- [Own browser results](../evidence/astra-round2-browser-check.json), completed **16:09:38 AEDT**, and [reproducible Node/CDP script](../evidence/astra-round2-browser-check.mjs). Existing isolated Chrome on 9322 was reused, with no browser installation.
+- Light and dark at **1440×900, 390×844 and 360×800**: no page overflow, no JavaScript exceptions, no visible interactive targets below 44×44 px, six synthetic outcomes, live validation/reset, raw evidence layout and correct footer destination. Status text contrast was checked for matched, mismatch, duplicate and needs-review states, plus form errors. Matched-state minimum contrast was **4.58:1 light** and **4.64:1 dark**, including the corrected skip link.
+- Website/Phone keyboard Enter activation, both persisted choices after reload, real iframe media queries, inherited dark mode, 390×844 viewport, short-window sizing, usable embed scrolling, no nested loaded iframe, real-phone override and storage-denial fallback all passed.
+- Browser network capture recorded only the local preview origin. No genuine payment or public deployment acceptance is claimed.
+- Preview server PID **1839045** was verified as `node server.mjs` with cwd `/home/mash/mac/laptop-work/rr-redesign-astra/app` before stopping that process only. The updated server was restarted with `PORT=4322 npm start` for videos.
+- Opus review report mtime **16:05:03 AEDT** was read and compared with the live source at **16:07:15 AEDT**. Its bounded visual notes were applied. The claim that the original frame failed to fit a 900 px window was not adopted; own measured 390×844 viewport and screenshots verify that size. The short-window cap was added and tested separately.
+
+Selected screenshots, captured from the running app and visually inspected:
+
+| View | Light | Dark |
+| --- | --- | --- |
+| Desktop matched result | [1440×900](../evidence/round2-astra-light-1440-result.png) | [1440×900](../evidence/round2-astra-dark-1440-result.png) |
+| Phone-width result | [390×844](../evidence/round2-astra-light-390-result.png) | [390×844](../evidence/round2-astra-dark-390-result.png) |
+| Small phone initial view | [360×800](../evidence/round2-astra-light-360-initial.png) | [360×800](../evidence/round2-astra-dark-360-initial.png) |
+| Interactive phone frame | [390×844 iframe](../evidence/round2-astra-light-phone-preview.png) | [390×844 iframe](../evidence/round2-astra-dark-phone-preview.png) |
+| Short-window phone frame | [700 px window](../evidence/round2-astra-light-phone-preview-short.png) | [700 px window](../evidence/round2-astra-dark-phone-preview-short.png) |
+| Desktop mismatch | [Mismatch](../evidence/round2-astra-light-1440-mismatch.png) | [Mismatch](../evidence/round2-astra-dark-1440-mismatch.png) |
+| Footer and exact GitHub link | [Footer](../evidence/round2-astra-light-1440-footer.png) | [Footer](../evidence/round2-astra-dark-1440-footer.png) |
+
+Additional initial, result, mismatch, live-form and footer captures for all three sizes are in `evidence/round2-astra-*.png`. Orchestrator artifacts remain untouched and are excluded from this commit.
+
+### Remaining boundaries
+
+No physical-phone, Safari or assistive-technology session was performed; this remains a Chrome viewport and keyboard/contrast check. Website and Phone render separate instances of the same app, so their current selection is independent. Display preference persists, not payment data. No tunnel configuration, deployed copy, main worktree, push or merge was touched. The public deployment target and its final acceptance belong to the orchestrator handoff. All existing payment, synthetic-fixture, RPC-trust and replay-protection limitations remain visible.

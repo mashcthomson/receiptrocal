@@ -1,0 +1,205 @@
+{
+  "startedAt": "2026-10-13T05:09:32.703Z",
+  "checks": [
+    "Storage denial does not break Website/Phone switching or embedded boot"
+  ],
+  "views": [
+    {
+      "theme": "light",
+      "width": 1440,
+      "height": 900,
+      "layout": {
+        "width": 1440,
+        "scrollWidth": 1425,
+        "resultLive": "polite",
+        "undersized": []
+      },
+      "contrast": {
+        "checked": 151,
+        "failures": [],
+        "minimum": 4.58
+      },
+      "checks": [
+        "all six demo results",
+        "status contrast",
+        "exact footer link",
+        "three-step workflow",
+        "no duplicate tabs",
+        "live validation/reset",
+        "raw evidence overflow"
+      ]
+    },
+    {
+      "theme": "light",
+      "width": 390,
+      "height": 844,
+      "layout": {
+        "width": 390,
+        "scrollWidth": 375,
+        "resultLive": "polite",
+        "undersized": []
+      },
+      "contrast": {
+        "checked": 137,
+        "failures": [],
+        "minimum": 4.58
+      },
+      "checks": [
+        "all six demo results",
+        "status contrast",
+        "exact footer link",
+        "three-step workflow",
+        "no duplicate tabs",
+        "live validation/reset",
+        "raw evidence overflow"
+      ]
+    },
+    {
+      "theme": "light",
+      "width": 360,
+      "height": 800,
+      "layout": {
+        "width": 360,
+        "scrollWidth": 345,
+        "resultLive": "polite",
+        "undersized": []
+      },
+      "contrast": {
+        "checked": 137,
+        "failures": [],
+        "minimum": 4.58
+      },
+      "checks": [
+        "all six demo results",
+        "status contrast",
+        "exact footer link",
+        "three-step workflow",
+        "no duplicate tabs",
+        "live validation/reset",
+        "raw evidence overflow"
+      ]
+    },
+    {
+      "theme": "dark",
+      "width": 1440,
+      "height": 900,
+      "layout": {
+        "width": 1440,
+        "scrollWidth": 1425,
+        "resultLive": "polite",
+        "undersized": []
+      },
+      "contrast": {
+        "checked": 151,
+        "failures": [],
+        "minimum": 4.64
+      },
+      "checks": [
+        "all six demo results",
+        "status contrast",
+        "exact footer link",
+        "three-step workflow",
+        "no duplicate tabs",
+        "live validation/reset",
+        "raw evidence overflow"
+      ]
+    },
+    {
+      "theme": "dark",
+      "width": 390,
+      "height": 844,
+      "layout": {
+        "width": 390,
+        "scrollWidth": 375,
+        "resultLive": "polite",
+        "undersized": []
+      },
+      "contrast": {
+        "checked": 137,
+        "failures": [],
+        "minimum": 4.64
+      },
+      "checks": [
+        "all six demo results",
+        "status contrast",
+        "exact footer link",
+        "three-step workflow",
+        "no duplicate tabs",
+        "live validation/reset",
+        "raw evidence overflow"
+      ]
+    },
+    {
+      "theme": "dark",
+      "width": 360,
+      "height": 800,
+      "layout": {
+        "width": 360,
+        "scrollWidth": 345,
+        "resultLive": "polite",
+        "undersized": []
+      },
+      "contrast": {
+        "checked": 137,
+        "failures": [],
+        "minimum": 4.64
+      },
+      "checks": [
+        "all six demo results",
+        "status contrast",
+        "exact footer link",
+        "three-step workflow",
+        "no duplicate tabs",
+        "live validation/reset",
+        "raw evidence overflow"
+      ]
+    }
+  ],
+  "preview": [
+    {
+      "theme": "light",
+      "width": 390,
+      "height": 844,
+      "embed": "true",
+      "switchHidden": true,
+      "frameHidden": true,
+      "nestedLoadedFrames": 0,
+      "mobileQueries": true,
+      "dark": false,
+      "src": "/?embed=1",
+      "selected": "true",
+      "websiteHidden": true,
+      "keyboard": "Enter",
+      "persistence": "both choices reload correctly",
+      "realPhone": "switch hidden; remembered Phone ignored; no iframe load",
+      "iframeDemo": "matched synthetic verdict rendered inside frame",
+      "shortViewport": "390x644 iframe fits 700px window",
+      "scrollbar": "hidden in embed; scrolling verified"
+    },
+    {
+      "theme": "dark",
+      "width": 390,
+      "height": 844,
+      "embed": "true",
+      "switchHidden": true,
+      "frameHidden": true,
+      "nestedLoadedFrames": 0,
+      "mobileQueries": true,
+      "dark": true,
+      "src": "/?embed=1",
+      "selected": "true",
+      "websiteHidden": true,
+      "keyboard": "Enter",
+      "persistence": "both choices reload correctly",
+      "realPhone": "switch hidden; remembered Phone ignored; no iframe load",
+      "iframeDemo": "matched synthetic verdict rendered inside frame",
+      "shortViewport": "390x644 iframe fits 700px window",
+      "scrollbar": "hidden in embed; scrolling verified"
+    }
+  ],
+  "exceptions": [],
+  "pageRequestOrigins": [
+    "http://127.0.0.1:4322"
+  ],
+  "completedAt": "2026-10-13T05:09:38.727Z"
+}

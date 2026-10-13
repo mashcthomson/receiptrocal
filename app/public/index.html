@@ -2,15 +2,16 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="color-scheme" content="light">
-  <meta name="description" content="A local, read-only desk that checks which invoice a Solana payment actually settles.">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="light dark">
+  <meta name="description" content="Read-only SOL invoice verification with a clear verdict and inspectable evidence.">
   <title>Receiptrocal</title>
   <link rel="icon" href="logo.svg#mark" type="image/svg+xml">
   <link rel="stylesheet" href="style.css">
   <script src="app.js" type="module"></script>
 </head>
 <body data-mode="demo">
+  <div id="website-view">
   <a class="skip" href="#main">Skip to content</a>
   <header class="top">
     <a class="brand" href="#main" aria-label="Payment verification desk">
@@ -24,13 +25,19 @@
     <div>
       <p class="eyebrow">PAYMENT VERIFICATION DESK</p>
       <h1>A receipt. A clear answer.</h1>
-      <p class="tagline">Check the payment. See the evidence. Know what settles.</p>
+      <p class="tagline">Match a Solana payment to an invoice, with evidence you can inspect.</p>
     </div>
     <div class="mode-badge" id="mode-badge" role="status" aria-live="polite">
       <span class="mode-dot" aria-hidden="true"></span>
       <span class="mode-text"><strong id="mode-title">Synthetic demo</strong><span id="mode-sub">Fixtures only. Not onchain verification.</span></span>
     </div>
   </div>
+
+  <ol class="how-it-works" aria-label="How it works">
+    <li><span class="step-number">01</span><div><strong>Invoice</strong><span>Define who, how much and when.</span></div></li>
+    <li><span class="step-number">02</span><div><strong>Transaction</strong><span>Check the finalized payment evidence.</span></div></li>
+    <li><span class="step-number">03</span><div><strong>Verdict</strong><span>See the decision and every reason.</span></div></li>
+  </ol>
 
   <div class="workspace-bar">
   <nav class="tabs" role="tablist" aria-label="Mode">
@@ -43,7 +50,7 @@
       <span class="tab-label">Finalized Solana RPC</span>
     </button>
   </nav>
-    <span class="workspace-note">No wallet connection. No funds moved.</span>
+    <span class="workspace-note">Read-only. No wallet, no keys.</span>
   </div>
 
   <main id="main" class="layout">
@@ -61,6 +68,7 @@
           <strong>Synthetic fixtures only</strong>
           Fabricated examples, not proof of any onchain payment.
         </div>
+        <div class="case-columns" aria-hidden="true"><span>Scenario &amp; invoice</span><span>Amount</span><span>Verdict</span></div>
         <div class="table-wrap">
           <table class="invoices case-list" aria-describedby="demo-caption">
             <caption id="demo-caption" class="sr-only">Synthetic invoice fixtures. Choose a case to verify it.</caption>
@@ -176,13 +184,29 @@
   </main>
 
   <footer class="foot">
-    <div class="foot-heading"><h2>Evidence has boundaries.</h2><span>Local prototype · Read-only · SOL only</span></div>
+    <div class="foot-heading"><h2>Evidence has boundaries.</h2><span>Prototype · SOL only</span></div>
     <ul id="limitations">
       <li>SOL transfers through the System Program only. Anything else needs manual review.</li>
       <li>Live results trust the chosen Solana RPC endpoint. They are evidence, not cryptographic proof.</li>
       <li>Duplicate protection is local to this server and this browser session.</li>
       <li>Not custody, tax advice or complete fraud protection.</li>
     </ul>
+    <div class="footer-links"><span>Read-only. No wallet, no keys.</span><a href="https://github.com/mashcthomson/receiptrocal" rel="noreferrer">View on GitHub <span aria-hidden="true">↗</span></a></div>
   </footer>
+  </div>
+
+  <section id="phone-preview" class="phone-preview" aria-label="Phone preview" hidden>
+    <div class="phone-frame"><iframe id="phone-app" title="Payment verification desk, phone view"></iframe></div>
+  </section>
+  <div class="view-switch" role="group" aria-label="Display view">
+    <button type="button" data-view="website" aria-pressed="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8m-4-4v4"/></svg>
+      Website
+    </button>
+    <button type="button" data-view="phone" aria-pressed="false">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="6" y="2" width="12" height="20" rx="3"/><path d="M10 5h4m-3 14h2"/></svg>
+      Phone
+    </button>
+  </div>
 </body>
 </html>

@@ -664,9 +664,45 @@ function downloadRecord(record) {
   setTimeout(() => URL.revokeObjectURL(url), 1000);
 }
 
+// ---------- website / phone preview ----------
+
+function initDisplayView() {
+  // The embedded document always renders the app, never another phone frame.
+  if (new URLSearchParams(window.location.search).get('embed') === '1') {
+    document.body.dataset.embed = 'true';
+    document.documentElement.dataset.embed = 'true';
+    return;
+  }
+  const key = 'payment-desk.display-view.v1';
+  const smallScreen = window.matchMedia('(max-width: 600px)');
+  const frame = $('#phone-app');
+  let preferred = 'website';
+  try { if (localStorage.getItem(key) === 'phone') preferred = 'phone'; } catch { /* Storage is optional. */ }
+  const apply = () => {
+    const view = smallScreen.matches ? 'website' : preferred;
+    const phone = view === 'phone';
+    document.body.dataset.preview = view;
+    $('#website-view').hidden = phone;
+    $('#phone-preview').hidden = !phone;
+    for (const button of document.querySelectorAll('[data-view]')) button.setAttribute('aria-pressed', String(button.dataset.view === view));
+    if (phone && !frame.hasAttribute('src')) frame.src = '/?embed=1';
+  };
+  for (const button of document.querySelectorAll('[data-view]')) {
+    button.addEventListener('click', () => {
+      preferred = button.dataset.view;
+      try { localStorage.setItem(key, preferred); } catch { /* Still switch when storage is unavailable. */ }
+      apply();
+      window.scrollTo({ top: 0, behavior: 'instant' });
+    });
+  }
+  smallScreen.addEventListener('change', apply);
+  apply();
+}
+
 // ---------- boot ----------
 
 function init() {
+  initDisplayView();
   document.title = PRODUCT_NAME;
   document.querySelectorAll('[data-product-name]').forEach(node => { node.textContent = PRODUCT_NAME; });
   const logo = document.querySelector('[data-logo]');

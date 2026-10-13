@@ -6,6 +6,7 @@ import { verifyPayment } from './lib/verify.mjs';
 import { fetchEvidence } from './lib/rpc.mjs';
 
 const PRODUCT_NAME = 'Receiptrocal';
+const PUBLIC_HOST = 'receiptrocal.monishc.com.au';
 
 const root = dirname(fileURLToPath(import.meta.url));
 const LIMIT = 16 * 1024;
@@ -54,17 +55,28 @@ export function createApp({ fetcher = fetchEvidence, fixturePath = resolve(root,
     res.setHeader('X-Content-Type-Options', 'nosniff');
     res.setHeader('Cache-Control', 'no-store');
     res.setHeader('Referrer-Policy', 'no-referrer');
-    res.setHeader('Content-Security-Policy', "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; frame-ancestors 'none'; base-uri 'none'; form-action 'self'");
+    res.setHeader('Content-Security-Policy', "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; frame-src 'self'; frame-ancestors 'none'; base-uri 'none'; form-action 'self'");
     try {
       const host = req.headers.host || '';
       const port = server.address()?.port;
-      if (![ `127.0.0.1:${port}`, `localhost:${port}` ].includes(host)) {
-        throw failure('INVALID_HOST', `Use the loopback address printed by ${PRODUCT_NAME}.`, 403);
+      // Exact Host-to-Origin pairs. Forwarded headers never authorize a request.
+      const allowedOrigin = new Map([
+        [`127.0.0.1:${port}`, `http://127.0.0.1:${port}`],
+        [`localhost:${port}`, `http://localhost:${port}`],
+        [PUBLIC_HOST, `https://${PUBLIC_HOST}`],
+      ]).get(host);
+      if (!allowedOrigin) {
+        throw failure('INVALID_HOST', `Use an allowed ${PRODUCT_NAME} address.`, 403);
       }
-      if (req.headers.origin && req.headers.origin !== `http://${host}`) {
+      if (req.headers.origin !== undefined && req.headers.origin !== allowedOrigin) {
         throw failure('INVALID_ORIGIN', 'Cross-origin requests are not allowed.', 403);
       }
-      const pathname = new URL(req.url, `http://${host}`).pathname;
+      const url = new URL(req.url, allowedOrigin);
+      const pathname = url.pathname;
+      // Only the explicit app preview document is embeddable, and only by itself.
+      if (req.method === 'GET' && pathname === '/' && url.searchParams.get('embed') === '1') {
+        res.setHeader('Content-Security-Policy', res.getHeader('Content-Security-Policy').replace("frame-ancestors 'none'", "frame-ancestors 'self'"));
+      }
       if (req.method === 'GET' && pathname === '/api/health') {
         return json(res, 200, { ok: true, name: PRODUCT_NAME });
       }

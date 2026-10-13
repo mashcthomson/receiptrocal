@@ -1,4 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 236 40" fill="none">
+  <style>@media (prefers-color-scheme: dark) { text { fill: #e1eddf; } }</style>
   <view id="mark" viewBox="0 0 40 40"/>
   <rect width="40" height="40" rx="12" fill="#19352c"/>
   <path d="M12 11h12a6 6 0 0 1 0 12h-8m-4 6V11m9 12 7 6" stroke="#c1ee8f" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
