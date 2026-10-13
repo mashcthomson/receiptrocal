@@ -1,0 +1,223 @@
+{
+  "startedAt": "2026-10-13T05:34:30.796Z",
+  "views": [
+    {
+      "theme": "current",
+      "system": "light",
+      "width": 1440,
+      "height": 900,
+      "layout": {
+        "width": 1440,
+        "scrollWidth": 1425,
+        "resultLive": "polite",
+        "undersized": []
+      },
+      "contrast": {
+        "checked": 151,
+        "failures": [],
+        "minimum": 4.58
+      }
+    },
+    {
+      "theme": "current",
+      "system": "light",
+      "width": 390,
+      "height": 844,
+      "layout": {
+        "width": 390,
+        "scrollWidth": 375,
+        "resultLive": "polite",
+        "undersized": []
+      },
+      "contrast": {
+        "checked": 137,
+        "failures": [],
+        "minimum": 4.58
+      }
+    },
+    {
+      "theme": "current",
+      "system": "dark",
+      "width": 1440,
+      "height": 900,
+      "layout": {
+        "width": 1440,
+        "scrollWidth": 1425,
+        "resultLive": "polite",
+        "undersized": []
+      },
+      "contrast": {
+        "checked": 151,
+        "failures": [],
+        "minimum": 4.64
+      }
+    },
+    {
+      "theme": "current",
+      "system": "dark",
+      "width": 390,
+      "height": 844,
+      "layout": {
+        "width": 390,
+        "scrollWidth": 375,
+        "resultLive": "polite",
+        "undersized": []
+      },
+      "contrast": {
+        "checked": 137,
+        "failures": [],
+        "minimum": 4.64
+      }
+    },
+    {
+      "theme": "sage",
+      "system": "light",
+      "width": 1440,
+      "height": 900,
+      "layout": {
+        "width": 1440,
+        "scrollWidth": 1425,
+        "resultLive": "polite",
+        "undersized": []
+      },
+      "contrast": {
+        "checked": 151,
+        "failures": [],
+        "minimum": 4.58
+      }
+    },
+    {
+      "theme": "sage",
+      "system": "light",
+      "width": 390,
+      "height": 844,
+      "layout": {
+        "width": 390,
+        "scrollWidth": 375,
+        "resultLive": "polite",
+        "undersized": []
+      },
+      "contrast": {
+        "checked": 137,
+        "failures": [],
+        "minimum": 4.58
+      }
+    },
+    {
+      "theme": "sage",
+      "system": "dark",
+      "width": 1440,
+      "height": 900,
+      "layout": {
+        "width": 1440,
+        "scrollWidth": 1425,
+        "resultLive": "polite",
+        "undersized": []
+      },
+      "contrast": {
+        "checked": 151,
+        "failures": [],
+        "minimum": 4.58
+      }
+    },
+    {
+      "theme": "sage",
+      "system": "dark",
+      "width": 390,
+      "height": 844,
+      "layout": {
+        "width": 390,
+        "scrollWidth": 375,
+        "resultLive": "polite",
+        "undersized": []
+      },
+      "contrast": {
+        "checked": 137,
+        "failures": [],
+        "minimum": 4.58
+      }
+    },
+    {
+      "theme": "colosseum",
+      "system": "light",
+      "width": 1440,
+      "height": 900,
+      "layout": {
+        "width": 1440,
+        "scrollWidth": 1425,
+        "resultLive": "polite",
+        "undersized": []
+      },
+      "contrast": {
+        "checked": 151,
+        "failures": [],
+        "minimum": 5.22
+      }
+    },
+    {
+      "theme": "colosseum",
+      "system": "light",
+      "width": 390,
+      "height": 844,
+      "layout": {
+        "width": 390,
+        "scrollWidth": 375,
+        "resultLive": "polite",
+        "undersized": []
+      },
+      "contrast": {
+        "checked": 137,
+        "failures": [],
+        "minimum": 5.22
+      }
+    },
+    {
+      "theme": "colosseum",
+      "system": "dark",
+      "width": 1440,
+      "height": 900,
+      "layout": {
+        "width": 1440,
+        "scrollWidth": 1425,
+        "resultLive": "polite",
+        "undersized": []
+      },
+      "contrast": {
+        "checked": 151,
+        "failures": [],
+        "minimum": 5.22
+      }
+    },
+    {
+      "theme": "colosseum",
+      "system": "dark",
+      "width": 390,
+      "height": 844,
+      "layout": {
+        "width": 390,
+        "scrollWidth": 375,
+        "resultLive": "polite",
+        "undersized": []
+      },
+      "contrast": {
+        "checked": 137,
+        "failures": [],
+        "minimum": 5.22
+      }
+    }
+  ],
+  "checks": [
+    "All six synthetic cases on each theme/size/system appearance",
+    "Status and live-validation contrast AA",
+    "Controls at least 44px and no overflow",
+    "Colosseum serif 400, square controls, red primary/white text",
+    "URL overrides storage; invalid URL falls back; selection persists",
+    "Keyboard Enter activates swatch",
+    "Embedded theme changes preserve verdict without reload; actual 390px viewport; no nested iframe; embedded picker hidden",
+    "Storage denial handled",
+    "Current automatic dark; Sage and Colosseum forced light even under dark system",
+    "Only same-origin page requests; no external fonts"
+  ],
+  "exceptions": [],
+  "completedAt": "2026-10-13T05:34:53.760Z"
+}

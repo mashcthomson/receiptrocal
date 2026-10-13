@@ -370,7 +370,7 @@ body[data-embed="true"] .view-switch, body[data-embed="true"] .phone-preview { d
 
 /* System-driven dark theme. Status meaning and fixture notices stay explicit. */
 @media (prefers-color-scheme: dark) {
-  :root {
+  html[data-theme="current"] {
     color-scheme: dark;
     --canvas: #101b16;
     --surface: #18251e;
@@ -389,30 +389,31 @@ body[data-embed="true"] .view-switch, body[data-embed="true"] .phone-preview { d
     --orange-soft: #3b2d22;
     --focus: #95baff;
   }
-  .skip { background: var(--lime); color: #19352c; }
-  .tabs { background: #1c2b21; }
-  .tab:hover, .btn-ghost:hover:not(:disabled), .btn-copy:hover { background: #2b3d2f; }
-  .tab[aria-selected="true"] { background: #34482e; border-color: #627853; box-shadow: none; }
-  .mode-badge, .banner-demo, .verdict-needs_review, .verdict-unknown { border-color: #6d5e3d; }
-  .mode-text strong, .mode-text span, .banner-demo, .banner-demo strong, .prov-demo { color: var(--amber); }
-  body[data-mode="live"] .mode-badge, .banner-live, .verdict-matched { border-color: #47623b; }
-  .btn-primary, #demo-run-all { background: var(--lime); color: #19352c; }
-  .btn-primary:hover:not(:disabled), #demo-run-all:hover:not(:disabled) { background: #d0f5a8; }
-  .case-list tr:hover { background: #243629; border-color: #637958; }
-  .case-list tr.selected { background: #2b4029; border-color: #89ab72; }
-  .verdict-matched { background: var(--green-soft); }
-  .verdict-mismatch { border-color: #71474c; }
-  .verdict-duplicate { border-color: #6c503c; }
-  .verdict-icon { background: #ffffff0d; }
-  .placeholder-icon { background: #293d26; border-color: #4c6342; }
-  .ix-transfer { background: #203722; }
-  .raw pre { background: var(--canvas); }
-  input, select { border-color: #788b74; }
-  input[aria-invalid="true"] { background: #302023; }
-  .form-errors, .error-card { border-color: #9d656c; }
-  .view-switch { border-color: #758d68; box-shadow: 0 6px 24px #0005; }
-  .view-switch button[aria-pressed="true"] { background: var(--lime); color: #19352c; }
-  .phone-frame { border-color: #3a4d3c; box-shadow: 0 24px 64px #0005, 0 0 0 1px #788a79; }
+html[data-theme="current"] .skip { background: var(--lime); color: #19352c; }
+html[data-theme="current"] .tabs { background: #1c2b21; }
+html[data-theme="current"] .tab:hover, html[data-theme="current"] .btn-ghost:hover:not(:disabled), html[data-theme="current"] .btn-copy:hover { background: #2b3d2f; }
+html[data-theme="current"] .tab[aria-selected="true"] { background: #34482e; border-color: #627853; box-shadow: none; }
+html[data-theme="current"] .mode-badge, html[data-theme="current"] .banner-demo, html[data-theme="current"] .verdict-needs_review, html[data-theme="current"] .verdict-unknown { border-color: #6d5e3d; }
+html[data-theme="current"] .mode-text strong, html[data-theme="current"] .mode-text span, html[data-theme="current"] .banner-demo, html[data-theme="current"] .banner-demo strong, html[data-theme="current"] .prov-demo { color: var(--amber); }
+html[data-theme="current"] body[data-mode="live"] .mode-badge, html[data-theme="current"] .banner-live, html[data-theme="current"] .verdict-matched { border-color: #47623b; }
+html[data-theme="current"] .btn-primary, html[data-theme="current"] #demo-run-all { background: var(--lime); color: #19352c; }
+html[data-theme="current"] .btn-primary:hover:not(:disabled), html[data-theme="current"] #demo-run-all:hover:not(:disabled) { background: #d0f5a8; }
+html[data-theme="current"] .case-list tr:hover { background: #243629; border-color: #637958; }
+html[data-theme="current"] .case-list tr.selected { background: #2b4029; border-color: #89ab72; }
+html[data-theme="current"] .verdict-matched { background: var(--green-soft); }
+html[data-theme="current"] .verdict-mismatch { border-color: #71474c; }
+html[data-theme="current"] .verdict-duplicate { border-color: #6c503c; }
+html[data-theme="current"] .verdict-icon { background: #ffffff0d; }
+html[data-theme="current"] .placeholder-icon { background: #293d26; border-color: #4c6342; }
+html[data-theme="current"] .ix-transfer { background: #203722; }
+html[data-theme="current"] .raw pre { background: var(--canvas); }
+html[data-theme="current"] input, html[data-theme="current"] select { border-color: #788b74; }
+html[data-theme="current"] input[aria-invalid="true"] { background: #302023; }
+html[data-theme="current"] .form-errors, html[data-theme="current"] .error-card { border-color: #9d656c; }
+html[data-theme="current"] .view-switch { border-color: #758d68; box-shadow: 0 6px 24px #0005; }
+html[data-theme="current"] .view-switch button[aria-pressed="true"] { background: var(--lime); color: #19352c; }
+html[data-theme="current"] .phone-frame { border-color: #3a4d3c; box-shadow: 0 24px 64px #0005, 0 0 0 1px #788a79; }
+
 }
 @media print {
   :root { color-scheme: light; --canvas: white; --surface: white; --ink: #19352c; --text: #263b33; --muted: #5d6c63; --line: #d9e0d7; --soft: #f0f3ed; }
@@ -420,3 +421,76 @@ body[data-embed="true"] .view-switch, body[data-embed="true"] .phone-preview { d
   #website-view[hidden] { display: block !important; }
   body { padding-bottom: 0 !important; }
 }
+
+/* Sage preserves every round-one light token, independent of system appearance. */
+html[data-theme="sage"] {
+  color-scheme: light;
+  --canvas: #f4f5f0;
+  --surface: #ffffff;
+  --ink: #19352c;
+  --text: #263b33;
+  --muted: #5d6c63;
+  --line: #d9e0d7;
+  --soft: #f0f3ed;
+  --lime: #c1ee8f;
+  --green: #205c3d;
+  --green-soft: #e9f6de;
+  --red: #9e303b;
+  --red-soft: #fff0ef;
+  --amber: #805313;
+  --amber-soft: #fff5dc;
+  --orange: #945020;
+  --orange-soft: #fff0e3;
+  --focus: #285ccc;
+  --radius: 20px;
+  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --mono: ui-monospace, "SFMono-Regular", Consolas, monospace;
+  font-family: var(--sans);
+  font-size: 16px;
+}
+
+/* Colosseum-inspired colour and type only. No external fonts or artwork. */
+html[data-theme="colosseum"] {
+  color-scheme: light;
+  --canvas: #f5f5f5; --surface: #ffffff; --ink: #171717; --text: #262626;
+  --muted: #525252; --line: #d4d4d4; --soft: #f0f0f0; --lime: #c00000;
+  --green: #166534; --green-soft: #e3f3e8; --red: #9d0000; --red-soft: #fbe9e9;
+  --amber: #8a5300; --amber-soft: #fcf1d9; --orange: #a8420a; --orange-soft: #fdeadd;
+  --focus: #5b3567; --radius: 0px;
+  --sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  --mono: ui-monospace, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+}
+html[data-theme="colosseum"] :is(h1, h2),
+html[data-theme="colosseum"] #result :is(.verdict-title, .placeholder h3) {
+  font-family: ui-serif, Georgia, serif; font-weight: 400; letter-spacing: -.035em;
+}
+html[data-theme="colosseum"] :is(.panel, .tabs, .tab, .btn, .btn-copy, .mode-badge, .banner, .case-list tr, .badge, .receipt-tag, .placeholder-icon, .prov, .verdict, .amount, .raw, input, select, .form-errors, .error-card, .how-it-works, .view-switch, .view-switch button, .theme-switch, .theme-switch button, .invoices tr, .ix tr) {
+  border-radius: 0; box-shadow: none;
+}
+html[data-theme="colosseum"] :is(.btn-primary, #demo-run-all, .view-switch button[aria-pressed="true"]) { background: var(--lime); color: #fff; font-weight: 500; }
+html[data-theme="colosseum"] :is(.btn-primary, #demo-run-all):hover:not(:disabled) { background: #a80000; }
+html[data-theme="colosseum"] :is(.tabs, .btn-ghost, .placeholder-icon) { background: var(--soft); border-color: var(--line); }
+html[data-theme="colosseum"] :is(.tab:hover, .btn-ghost:hover:not(:disabled), .btn-copy:hover, .case-list tr:hover) { background: var(--soft); }
+html[data-theme="colosseum"] .tab[aria-selected="true"] { background: var(--surface); }
+html[data-theme="colosseum"] .case-list tr.selected { background: var(--soft); border-color: var(--muted); box-shadow: inset 3px 0 var(--lime); }
+html[data-theme="colosseum"] :is(.mode-text strong, .mode-text span, .banner-demo, .banner-demo strong, .prov-demo) { color: var(--amber); }
+html[data-theme="colosseum"] body[data-mode="live"] :is(.mode-text strong, .mode-text span) { color: var(--green); }
+html[data-theme="colosseum"] :is(.verdict-matched, .ix-transfer) { background: var(--green-soft); }
+html[data-theme="colosseum"] .raw pre { background: var(--canvas); }
+html[data-theme="colosseum"] input[aria-invalid="true"] { background: var(--red-soft); }
+html[data-theme="colosseum"] .step-number { color: var(--lime); }
+html[data-theme="colosseum"] :is(input, select) { border-color: var(--muted); }
+html[data-theme="colosseum"] .view-switch { border-color: var(--muted); }
+/* Three compact, labelled swatches next to the existing display control. */
+.theme-switch { position: fixed; z-index: 15; right: max(12px, env(safe-area-inset-right)); bottom: calc(max(12px, env(safe-area-inset-bottom)) + 62px); display: flex; gap: 4px; padding: 4px; border: 1px solid var(--muted); border-radius: 14px; background: var(--surface); }
+.theme-switch button { width: 44px; height: 44px; display: grid; place-items: center; border: 2px solid transparent; border-radius: 9px; padding: 0; background: transparent; }
+.theme-switch button[aria-pressed="true"] { border-color: var(--ink); background: var(--soft); }
+.theme-swatch { display: block; width: 22px; height: 22px; border: 1px solid #525252; border-radius: 50%; }
+.swatch-current { background: linear-gradient(90deg, #f4f5f0 50%, #19352c 50%); }
+.swatch-sage { background: #c1ee8f; }
+.swatch-colosseum { background: #c00000; }
+body[data-embed="true"] .theme-switch { display: none; }
+@media (max-width: 600px) {
+  .theme-switch { position: static; width: max-content; margin: 12px max(16px, env(safe-area-inset-right)) 16px auto; }
+}
+@media print { .theme-switch { display: none !important; } }
