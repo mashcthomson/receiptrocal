@@ -670,7 +670,7 @@ function initTheme() {
   const key = 'receiptrocal.theme.v1';
   const allowed = new Set(['current', 'sage', 'colosseum']);
   const url = new URL(window.location.href);
-  let theme = 'current';
+  let theme = 'colosseum';
   try { const saved = localStorage.getItem(key); if (allowed.has(saved)) theme = saved; } catch { /* Storage is optional. */ }
   if (allowed.has(url.searchParams.get('theme'))) theme = url.searchParams.get('theme');
   const frame = $('#phone-app');
