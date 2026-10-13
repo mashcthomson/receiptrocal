@@ -1,8 +1,8 @@
-# ReceiptRail
+# Receiptrocal
 
 Agents and merchants check whether a Solana payment matches a specific invoice before releasing goods.
 
-ReceiptRail is a local, read-only SOL invoice verifier with a browser desk, JSON CLI, stdio MCP tools and an x402-style merchant demonstration. It uses Node 22 built-ins. No npm installation, wallet, keys or signing are needed.
+This app is a local, read-only SOL invoice verifier with a browser desk, JSON CLI, stdio MCP tools and an x402-style merchant demonstration. It uses Node 22 built-ins. No npm installation, wallet, keys or signing are needed.
 
 ## Run
 

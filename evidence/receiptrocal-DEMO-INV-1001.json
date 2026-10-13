@@ -1,0 +1,73 @@
+{
+  "tool": "Receiptrocal",
+  "format": "receiptrail-evidence/v1",
+  "exportedAt": "2026-10-13T04:30:46.694Z",
+  "mode": "demo",
+  "synthetic": true,
+  "notice": "SYNTHETIC DEMO FIXTURE. Not onchain verification. Proves nothing about any real payment.",
+  "demoCase": "paid",
+  "invoice": {
+    "id": "INV-1001",
+    "recipient": "2xuj2Z52isNFb6ftM1wnoFD9dhi9RjntX1AcZiTN8Txf",
+    "amountLamports": "1000000000",
+    "notBefore": 1791842400
+  },
+  "result": {
+    "status": "matched",
+    "code": "PAYMENT_MATCHED",
+    "reasons": [
+      "Synthetic fixture matches the invoice; this is not onchain verification."
+    ],
+    "invoiceId": "INV-1001",
+    "signature": "d9bD1Q4o29tXKaxiUUFKqFgJvPAR5cpk2Je5ifgvoC3fDmoVBAKJMd8sLsRz33raY2AB56oUkkeLVS2cV4GmiQh",
+    "expectedLamports": "1000000000",
+    "observedLamports": "1000000000",
+    "recipient": "2xuj2Z52isNFb6ftM1wnoFD9dhi9RjntX1AcZiTN8Txf",
+    "source": "fixture",
+    "cluster": "devnet",
+    "slot": 400000001,
+    "blockTime": 1791842460
+  },
+  "evidence": {
+    "source": "fixture",
+    "cluster": "devnet",
+    "signature": "d9bD1Q4o29tXKaxiUUFKqFgJvPAR5cpk2Je5ifgvoC3fDmoVBAKJMd8sLsRz33raY2AB56oUkkeLVS2cV4GmiQh",
+    "commitment": "finalized",
+    "fetchedAt": "2026-10-12T18:30:00.000Z",
+    "transaction": {
+      "slot": 400000001,
+      "blockTime": 1791842460,
+      "transaction": {
+        "signatures": [
+          "d9bD1Q4o29tXKaxiUUFKqFgJvPAR5cpk2Je5ifgvoC3fDmoVBAKJMd8sLsRz33raY2AB56oUkkeLVS2cV4GmiQh"
+        ],
+        "message": {
+          "instructions": [
+            {
+              "program": "system",
+              "programId": "11111111111111111111111111111111",
+              "parsed": {
+                "type": "transfer",
+                "info": {
+                  "source": "4vZJBHaKsWypdivbw6jq3WqffwK9i9kdboPWbriaKYvk",
+                  "destination": "2xuj2Z52isNFb6ftM1wnoFD9dhi9RjntX1AcZiTN8Txf",
+                  "lamports": 1000000000
+                }
+              }
+            }
+          ]
+        }
+      },
+      "meta": {
+        "err": null,
+        "innerInstructions": []
+      }
+    }
+  },
+  "limitations": [
+    "SOL transfers only. Unsupported transaction types require manual review.",
+    "Live results trust the selected Solana RPC endpoint; they are not cryptographic proofs.",
+    "Duplicate protection is local to this server process and resets on restart.",
+    "Synthetic demo fixtures do not establish any onchain payment."
+  ]
+}

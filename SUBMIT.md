@@ -1,10 +1,10 @@
-# ReceiptRail submission pack
+# Submission pack
 
 Prepared 13-10-26. Track: Solana ecosystem. Local code path: `/home/mash/MASTER/hackathon-20261013`.
 
 ## Paste-ready title and pitch
 
-**ReceiptRail**
+**Receiptrocal**
 
 Agents and merchants check that a Solana payment settles a specific invoice before they release goods.
 
@@ -12,7 +12,7 @@ Agents and merchants check that a Solana payment settles a specific invoice befo
 
 A transaction link is not enough to reconcile an invoice. The recipient, amount, execution outcome and previous use of that receipt all matter.
 
-ReceiptRail is a read-only SOL invoice verification prototype. It compares invoice expectations with finalized transaction data from canonical Solana RPC endpoints, uses exact integer arithmetic, and returns a machine-readable decision with inspectable evidence. A local browser desk and CLI make the same checks accessible to people. Stdio MCP tools let agents request verification. An x402-style merchant demonstration returns HTTP 402 with an invoice and releases a synthetic dataset only when the receipt matches.
+The app is a read-only SOL invoice verification prototype. It compares invoice expectations with finalized transaction data from canonical Solana RPC endpoints, uses exact integer arithmetic, and returns a machine-readable decision with inspectable evidence. A local browser desk and CLI make the same checks accessible to people. Stdio MCP tools let agents request verification. An x402-style merchant demonstration returns HTTP 402 with an invoice and releases a synthetic dataset only when the receipt matches.
 
 The demo includes a matching payment, one-lamport underpayment, wrong recipient, duplicate receipt, failed transaction and unavailable transaction. Every fixture is visibly synthetic. Live RPC errors remain errors; the app never substitutes demo success. Replay protection is scoped to each running process and resets on restart.
 
@@ -44,7 +44,7 @@ For agent integration, configure a stdio MCP client with `node /absolute/path/to
 
 ## Presentation video script, about 2 to 3 minutes
 
-"ReceiptRail helps agents and merchants check whether a Solana transaction matches a particular invoice before releasing goods.
+"This verifier helps agents and merchants check whether a Solana transaction matches a particular invoice before releasing goods.
 
 Imagine a service that sells a dataset. A buyer sends a transaction link. Before delivering the data, the merchant needs to know more than whether that link exists. Did the transfer reach the right address? Was the amount exact? Did the transaction succeed? Has that same receipt already been used for another invoice?
 

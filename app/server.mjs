@@ -5,6 +5,8 @@ import { resolve, dirname } from 'node:path';
 import { verifyPayment } from './lib/verify.mjs';
 import { fetchEvidence } from './lib/rpc.mjs';
 
+const PRODUCT_NAME = 'Receiptrocal';
+
 const root = dirname(fileURLToPath(import.meta.url));
 const LIMIT = 16 * 1024;
 const limitations = [
@@ -57,14 +59,14 @@ export function createApp({ fetcher = fetchEvidence, fixturePath = resolve(root,
       const host = req.headers.host || '';
       const port = server.address()?.port;
       if (![ `127.0.0.1:${port}`, `localhost:${port}` ].includes(host)) {
-        throw failure('INVALID_HOST', 'Use the loopback address printed by ReceiptRail.', 403);
+        throw failure('INVALID_HOST', `Use the loopback address printed by ${PRODUCT_NAME}.`, 403);
       }
       if (req.headers.origin && req.headers.origin !== `http://${host}`) {
         throw failure('INVALID_ORIGIN', 'Cross-origin requests are not allowed.', 403);
       }
       const pathname = new URL(req.url, `http://${host}`).pathname;
       if (req.method === 'GET' && pathname === '/api/health') {
-        return json(res, 200, { ok: true, name: 'ReceiptRail' });
+        return json(res, 200, { ok: true, name: PRODUCT_NAME });
       }
       if (req.method === 'GET' && pathname === '/api/demo') {
         return json(res, 200, JSON.parse(await readFile(fixturePath, 'utf8')));
@@ -148,6 +150,6 @@ if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.ur
   const port = Number(process.env.PORT || 4318);
   if (!Number.isInteger(port) || port < 1 || port > 65535) throw new Error('PORT must be 1-65535.');
   const server = createApp();
-  server.on('error', error => { console.error(`ReceiptRail: ${error.message}`); process.exitCode = 1; });
-  server.listen(port, '127.0.0.1', () => console.log(`ReceiptRail local desk: http://127.0.0.1:${port}\nRead-only. Demo data is synthetic. Duplicate ledger resets on restart.`));
+  server.on('error', error => { console.error(`${PRODUCT_NAME}: ${error.message}`); process.exitCode = 1; });
+  server.listen(port, '127.0.0.1', () => console.log(`${PRODUCT_NAME} local desk: http://127.0.0.1:${port}\nRead-only. Demo data is synthetic. Duplicate ledger resets on restart.`));
 }

@@ -1,0 +1,87 @@
+{
+  "startedAt": "2026-10-13T04:30:45.899Z",
+  "checks": [
+    "Evidence copy JSON contains synthetic notice and unchanged machine verdict",
+    "1440x900: six demo verdicts, run all, exact lamport display, raw evidence, mode isolation, empty form validation, reset, overflow and touch targets",
+    "390x844: six demo verdicts, run all, exact lamport display, raw evidence, mode isolation, empty form validation, reset, overflow and touch targets",
+    "360x800: six demo verdicts, run all, exact lamport display, raw evidence, mode isolation, empty form validation, reset, overflow and touch targets",
+    "Keyboard arrows/Home switch tabs; Enter selects a case and focus survives async rerender",
+    "Actual evidence download saved and parsed, with synthetic notice",
+    "Simulated RPC 502 remains an error in form and history, with no verdict and no fixture fallback"
+  ],
+  "layouts": [
+    {
+      "view": "initial",
+      "width": 1440,
+      "scrollWidth": 1425,
+      "resultLive": "polite",
+      "undersized": []
+    },
+    {
+      "view": "expanded evidence",
+      "width": 1440,
+      "scrollWidth": 1425,
+      "resultLive": "polite",
+      "undersized": []
+    },
+    {
+      "view": "live form",
+      "width": 1440,
+      "scrollWidth": 1425,
+      "resultLive": "polite",
+      "undersized": []
+    },
+    {
+      "view": "initial",
+      "width": 390,
+      "scrollWidth": 375,
+      "resultLive": "polite",
+      "undersized": []
+    },
+    {
+      "view": "expanded evidence",
+      "width": 390,
+      "scrollWidth": 375,
+      "resultLive": "polite",
+      "undersized": []
+    },
+    {
+      "view": "live form",
+      "width": 390,
+      "scrollWidth": 375,
+      "resultLive": "polite",
+      "undersized": []
+    },
+    {
+      "view": "initial",
+      "width": 360,
+      "scrollWidth": 345,
+      "resultLive": "polite",
+      "undersized": []
+    },
+    {
+      "view": "expanded evidence",
+      "width": 360,
+      "scrollWidth": 345,
+      "resultLive": "polite",
+      "undersized": []
+    },
+    {
+      "view": "live form",
+      "width": 360,
+      "scrollWidth": 345,
+      "resultLive": "polite",
+      "undersized": []
+    }
+  ],
+  "contrast": {
+    "checked": 129,
+    "failures": [],
+    "minimum": 4.58
+  },
+  "exceptions": [],
+  "pageRequestOrigins": [
+    "http://127.0.0.1:4322"
+  ],
+  "completedAt": "2026-10-13T04:30:48.728Z"
+}

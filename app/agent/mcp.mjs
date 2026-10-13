@@ -1,4 +1,4 @@
-// ReceiptRail MCP server: read-only payment verification tools over stdio.
+// Payment verification MCP server: read-only payment verification tools over stdio.
 // Newline-delimited JSON-RPC 2.0 on stdin/stdout; diagnostics go to stderr only.
 // No keys, no signing, no transaction submission. Live mode reads finalized RPC data.
 import { readFile } from 'node:fs/promises';
@@ -9,7 +9,8 @@ import { fetchEvidence } from '../lib/rpc.mjs';
 
 const root = dirname(dirname(fileURLToPath(import.meta.url)));
 export const DEFAULT_FIXTURE_PATH = resolve(root, 'fixtures/demo.json');
-export const SERVER_INFO = Object.freeze({ name: 'receiptrail-mcp', version: '0.1.0' });
+const PRODUCT_NAME = 'Receiptrocal';
+export const SERVER_INFO = Object.freeze({ name: 'receiptrail-mcp', title: PRODUCT_NAME, version: '0.1.0' });
 const PROTOCOL_VERSIONS = ['2025-06-18', '2025-03-26', '2024-11-05'];
 // Mirrors the canonical allowlist inside lib/rpc.mjs; reported as provenance only.
 export const RPC_ENDPOINTS = Object.freeze({
@@ -151,7 +152,7 @@ const TOOLS = [
   {
     name: 'verify_invoice_payment',
     title: 'Verify a Solana invoice payment (read-only)',
-    description: 'Check whether a Solana transaction signature settles a specific SOL invoice. mode "demo" runs a named synthetic fixture case (caseId) and is never onchain verification. mode "live" fetches finalized evidence from the canonical Solana RPC endpoint for the given invoice and signature; caller-supplied evidence is never accepted. Signatures that settled another invoice in this process report duplicate. Never signs or sends transactions.',
+    description: `${PRODUCT_NAME}: check whether a Solana transaction signature settles a specific SOL invoice. mode "demo" runs a named synthetic fixture case (caseId) and is never onchain verification. mode "live" fetches finalized evidence from the canonical Solana RPC endpoint for the given invoice and signature; caller-supplied evidence is never accepted. Signatures that settled another invoice in this process report duplicate. Never signs or sends transactions.`,
     inputSchema: {
       type: 'object',
       properties: {
@@ -176,7 +177,7 @@ const TOOLS = [
   {
     name: 'list_demo_cases',
     title: 'List synthetic demo cases',
-    description: 'List the synthetic fixture cases usable with verify_invoice_payment mode "demo". Fixtures are not onchain data.',
+    description: `${PRODUCT_NAME}: list the synthetic fixture cases usable with verify_invoice_payment mode "demo". Fixtures are not onchain data.`,
     inputSchema: { type: 'object', properties: {}, additionalProperties: false },
     annotations: { readOnlyHint: true, destructiveHint: false, idempotentHint: true, openWorldHint: false },
   },
@@ -301,7 +302,7 @@ export function createMcpServer({
         protocolVersion: PROTOCOL_VERSIONS.includes(requested) ? requested : PROTOCOL_VERSIONS[0],
         capabilities: { tools: { listChanged: false } },
         serverInfo: SERVER_INFO,
-        instructions: 'Read-only Solana invoice verification. Demo mode is synthetic fixtures; live mode reads finalized canonical RPC data. Never signs or sends transactions.',
+        instructions: `${PRODUCT_NAME}: read-only Solana invoice verification. Demo mode is synthetic fixtures; live mode reads finalized canonical RPC data. Never signs or sends transactions.`,
       };
     }
     if (method === 'ping') return {};

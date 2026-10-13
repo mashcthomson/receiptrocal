@@ -1,0 +1,884 @@
+
+> receiptrocal@0.1.0 test
+> node --test test/*.test.mjs
+
+TAP version 13
+# Subtest: MCP lifecycle: initialize, tools/list, errors and notifications
+ok 1 - MCP lifecycle: initialize, tools/list, errors and notifications
+  ---
+  duration_ms: 2.713599
+  type: 'test'
+  ...
+# Subtest: MCP stdio framing: newline JSON on stdout only, diagnostics on stderr
+ok 2 - MCP stdio framing: newline JSON on stdout only, diagnostics on stderr
+  ---
+  duration_ms: 7.490047
+  type: 'test'
+  ...
+# Subtest: MCP stdio rejects an oversized newline-terminated line in one chunk, then recovers
+ok 3 - MCP stdio rejects an oversized newline-terminated line in one chunk, then recovers
+  ---
+  duration_ms: 3.548405
+  type: 'test'
+  ...
+# Subtest: list_demo_cases is labelled synthetic
+ok 4 - list_demo_cases is labelled synthetic
+  ---
+  duration_ms: 1.53291
+  type: 'test'
+  ...
+# Subtest: demo verification reproduces every fixture expectation with fixture provenance
+ok 5 - demo verification reproduces every fixture expectation with fixture provenance
+  ---
+  duration_ms: 13.443176
+  type: 'test'
+  ...
+# Subtest: caller-supplied evidence or mixed-mode arguments are refused
+ok 6 - caller-supplied evidence or mixed-mode arguments are refused
+  ---
+  duration_ms: 1.826377
+  type: 'test'
+  ...
+# Subtest: live input validation rejects bad invoice, signature and cluster before any fetch
+ok 7 - live input validation rejects bad invoice, signature and cluster before any fetch
+  ---
+  duration_ms: 2.130184
+  type: 'test'
+  ...
+# Subtest: live mode uses RPC evidence, honest provenance and process replay protection
+ok 8 - live mode uses RPC evidence, honest provenance and process replay protection
+  ---
+  duration_ms: 4.887422
+  type: 'test'
+  ...
+# Subtest: live mode refuses non-RPC evidence and surfaces RPC failures without recording
+ok 9 - live mode refuses non-RPC evidence and surfaces RPC failures without recording
+  ---
+  duration_ms: 2.409393
+  type: 'test'
+  ...
+# Subtest: concurrent live claims of one receipt settle only one invoice
+ok 10 - concurrent live claims of one receipt settle only one invoice
+  ---
+  duration_ms: 3.619035
+  type: 'test'
+  ...
+# Subtest: fixtures not marked source fixture are refused in demo mode
+ok 11 - fixtures not marked source fixture are refused in demo mode
+  ---
+  duration_ms: 11.233634
+  type: 'test'
+  ...
+# Subtest: ledger conflict rules
+ok 12 - ledger conflict rules
+  ---
+  duration_ms: 1.714031
+  type: 'test'
+  ...
+# Subtest: merchant config fails clearly when absent or inconsistent
+ok 13 - merchant config fails clearly when absent or inconsistent
+  ---
+  duration_ms: 4.184414
+  type: 'test'
+  ...
+# Subtest: merchant demo: 402 invoice, release on match, refuse bad payments and duplicate receipts
+ok 14 - merchant demo: 402 invoice, release on match, refuse bad payments and duplicate receipts
+  ---
+  duration_ms: 71.489611
+  type: 'test'
+  ...
+# Subtest: merchant rejects buyer-made invoices, malformed headers, unknown receipts and foreign hosts
+ok 15 - merchant rejects buyer-made invoices, malformed headers, unknown receipts and foreign hosts
+  ---
+  duration_ms: 18.576626
+  type: 'test'
+  ...
+# Subtest: merchant state is in memory: invoices expire and vanish on restart
+ok 16 - merchant state is in memory: invoices expire and vanish on restart
+  ---
+  duration_ms: 13.418133
+  type: 'test'
+  ...
+# Subtest: merchant live mode: RPC evidence, notBefore binding and RPC failure withholds data
+ok 17 - merchant live mode: RPC evidence, notBefore binding and RPC failure withholds data
+  ---
+  duration_ms: 19.527306
+  type: 'test'
+  ...
+# Subtest: scripted walkthrough produces the demo story
+ok 18 - scripted walkthrough produces the demo story
+  ---
+  duration_ms: 9.098327
+  type: 'test'
+  ...
+# Subtest: demo fixture catalog has the required stable cases
+ok 19 - demo fixture catalog has the required stable cases
+  ---
+  duration_ms: 1.580909
+  type: 'test'
+  ...
+# Subtest: fixtures use explicit synthetic provenance and valid identifiers
+ok 20 - fixtures use explicit synthetic provenance and valid identifiers
+  ---
+  duration_ms: 1.038853
+  type: 'test'
+  ...
+# Subtest: every fixture produces its declared verifier status
+ok 21 - every fixture produces its declared verifier status
+  ---
+  duration_ms: 2.38427
+  type: 'test'
+  ...
+# Subtest: CLI demo verifies all fixture cases
+ok 22 - CLI demo verifies all fixture cases
+  ---
+  duration_ms: 56.373331
+  type: 'test'
+  ...
+# Subtest: fetches finalized parsed evidence from fixed mainnet-beta endpoint
+ok 23 - fetches finalized parsed evidence from fixed mainnet-beta endpoint
+  ---
+  duration_ms: 4.252435
+  type: 'test'
+  ...
+# Subtest: fetches finalized parsed evidence from fixed devnet endpoint
+ok 24 - fetches finalized parsed evidence from fixed devnet endpoint
+  ---
+  duration_ms: 0.508507
+  type: 'test'
+  ...
+# Subtest: defaults to mainnet and preserves unavailable transaction as null
+ok 25 - defaults to mainnet and preserves unavailable transaction as null
+  ---
+  duration_ms: 0.277048
+  type: 'test'
+  ...
+# Subtest: accepts a nonzero 64-byte signature
+ok 26 - accepts a nonzero 64-byte signature
+  ---
+  duration_ms: 0.321956
+  type: 'test'
+  ...
+# Subtest: rejects invalid alphabet, type and decoded length before fetching
+ok 27 - rejects invalid alphabet, type and decoded length before fetching
+  ---
+  duration_ms: 1.47223
+  type: 'test'
+  ...
+# Subtest: rejects non-allowlisted clusters before fetching
+ok 28 - rejects non-allowlisted clusters before fetching
+  ---
+  duration_ms: 0.470017
+  type: 'test'
+  ...
+# Subtest: rejects invalid options with useful codes
+ok 29 - rejects invalid options with useful codes
+  ---
+  duration_ms: 1.944546
+  type: 'test'
+  ...
+# Subtest: maps network failures without leaking underlying details
+ok 30 - maps network failures without leaking underlying details
+  ---
+  duration_ms: 0.646197
+  type: 'test'
+  ...
+# Subtest: maps HTTP failures including rate limiting without reading the body
+ok 31 - maps HTTP failures including rate limiting without reading the body
+  ---
+  duration_ms: 1.682296
+  type: 'test'
+  ...
+# Subtest: rejects malformed HTTP and JSON responses
+ok 32 - rejects malformed HTTP and JSON responses
+  ---
+  duration_ms: 0.911435
+  type: 'test'
+  ...
+# Subtest: validates JSON-RPC version, request id and exclusive result/error
+ok 33 - validates JSON-RPC version, request id and exclusive result/error
+  ---
+  duration_ms: 0.996349
+  type: 'test'
+  ...
+# Subtest: returns RPC failure code and provider message for unsupported versions
+ok 34 - returns RPC failure code and provider message for unsupported versions
+  ---
+  duration_ms: 0.272091
+  type: 'test'
+  ...
+# Subtest: rejects malformed transaction result structures
+ok 35 - rejects malformed transaction result structures
+  ---
+  duration_ms: 0.846744
+  type: 'test'
+  ...
+# Subtest: preserves failed transactions and null metadata for verifier decisions
+ok 36 - preserves failed transactions and null metadata for verifier decisions
+  ---
+  duration_ms: 0.287285
+  type: 'test'
+  ...
+# Subtest: timeout aborts fetch even if implementation ignores cancellation
+ok 37 - timeout aborts fetch even if implementation ignores cancellation
+  ---
+  duration_ms: 14.551984
+  type: 'test'
+  ...
+# Subtest: timeout includes response body reading
+ok 38 - timeout includes response body reading
+  ---
+  duration_ms: 14.901257
+  type: 'test'
+  ...
+# Subtest: successful completion clears timeout without aborting completed request
+ok 39 - successful completion clears timeout without aborting completed request
+  ---
+  duration_ms: 30.041785
+  type: 'test'
+  ...
+# Subtest: demo cases run through the verifier and are visibly synthetic
+ok 40 - demo cases run through the verifier and are visibly synthetic
+  ---
+  duration_ms: 78.665257
+  type: 'test'
+  ...
+# Subtest: concurrent live requests cannot settle two invoices with one signature
+ok 41 - concurrent live requests cannot settle two invoices with one signature
+  ---
+  duration_ms: 54.572528
+  type: 'test'
+  ...
+# Subtest: HTTP boundary rejects cross-origin requests, malformed inputs and arbitrary files
+ok 42 - HTTP boundary rejects cross-origin requests, malformed inputs and arbitrary files
+  ---
+  duration_ms: 12.459995
+  type: 'test'
+  ...
+# Subtest: RPC failure remains an error and never becomes demo success
+ok 43 - RPC failure remains an error and never becomes demo success
+  ---
+  duration_ms: 4.488681
+  type: 'test'
+  ...
+# Subtest: returns the contract shape and labels synthetic results honestly
+ok 44 - returns the contract shape and labels synthetic results honestly
+  ---
+  duration_ms: 6.357295
+  type: 'test'
+  ...
+# Subtest: RPC result preserves source and provider limitation
+ok 45 - RPC result preserves source and provider limitation
+  ---
+  duration_ms: 0.52511
+  type: 'test'
+  ...
+# Subtest: RPC match explicitly notes provider trust
+ok 46 - RPC match explicitly notes provider trust
+  ---
+  duration_ms: 2.571966
+  type: 'test'
+  ...
+# Subtest: underpayment
+ok 47 - underpayment
+  ---
+  duration_ms: 0.467747
+  type: 'test'
+  ...
+# Subtest: overpayment
+ok 48 - overpayment
+  ---
+  duration_ms: 0.332994
+  type: 'test'
+  ...
+# Subtest: wrong recipient
+ok 49 - wrong recipient
+  ---
+  duration_ms: 0.240995
+  type: 'test'
+  ...
+# Subtest: duplicate signature
+ok 50 - duplicate signature
+  ---
+  duration_ms: 0.322773
+  type: 'test'
+  ...
+# Subtest: unrelated ledger signature
+ok 51 - unrelated ledger signature
+  ---
+  duration_ms: 0.432033
+  type: 'test'
+  ...
+# Subtest: failed transaction
+ok 52 - failed transaction
+  ---
+  duration_ms: 2.066763
+  type: 'test'
+  ...
+# Subtest: unavailable transaction
+ok 53 - unavailable transaction
+  ---
+  duration_ms: 0.953298
+  type: 'test'
+  ...
+# Subtest: signature binding
+ok 54 - signature binding
+  ---
+  duration_ms: 0.485327
+  type: 'test'
+  ...
+# Subtest: requested signature must be first, not a cosigner
+ok 55 - requested signature must be first, not a cosigner
+  ---
+  duration_ms: 0.3188
+  type: 'test'
+  ...
+# Subtest: non-finalized receipt
+ok 56 - non-finalized receipt
+  ---
+  duration_ms: 0.300427
+  type: 'test'
+  ...
+# Subtest: missing success metadata
+ok 57 - missing success metadata
+  ---
+  duration_ms: 0.271546
+  type: 'test'
+  ...
+# Subtest: unknown success metadata
+ok 58 - unknown success metadata
+  ---
+  duration_ms: 0.271634
+  type: 'test'
+  ...
+# Subtest: missing timestamp
+ok 59 - missing timestamp
+  ---
+  duration_ms: 0.290439
+  type: 'test'
+  ...
+# Subtest: null timestamp without constraint
+ok 60 - null timestamp without constraint
+  ---
+  duration_ms: 0.30643
+  type: 'test'
+  ...
+# Subtest: null timestamp with constraint
+ok 61 - null timestamp with constraint
+  ---
+  duration_ms: 0.304913
+  type: 'test'
+  ...
+# Subtest: payment predates invoice
+ok 62 - payment predates invoice
+  ---
+  duration_ms: 0.429285
+  type: 'test'
+  ...
+# Subtest: inclusive invoice timestamp
+ok 63 - inclusive invoice timestamp
+  ---
+  duration_ms: 0.307177
+  type: 'test'
+  ...
+# Subtest: forged system label
+ok 64 - forged system label
+  ---
+  duration_ms: 0.298442
+  type: 'test'
+  ...
+# Subtest: program id authoritative over display label
+ok 65 - program id authoritative over display label
+  ---
+  duration_ms: 0.293858
+  type: 'test'
+  ...
+# Subtest: token transfer unsupported
+ok 66 - token transfer unsupported
+  ---
+  duration_ms: 0.251108
+  type: 'test'
+  ...
+# Subtest: opaque instruction alongside payment cannot cause match
+ok 67 - opaque instruction alongside payment cannot cause match
+  ---
+  duration_ms: 0.289476
+  type: 'test'
+  ...
+# Subtest: unsupported system instruction
+ok 68 - unsupported system instruction
+  ---
+  duration_ms: 0.240624
+  type: 'test'
+  ...
+# Subtest: self transfer is not payment
+ok 69 - self transfer is not payment
+  ---
+  duration_ms: 0.278801
+  type: 'test'
+  ...
+# Subtest: recipient outflow needs review
+ok 70 - recipient outflow needs review
+  ---
+  duration_ms: 0.325766
+  type: 'test'
+  ...
+# Subtest: empty instructions do not settle
+ok 71 - empty instructions do not settle
+  ---
+  duration_ms: 0.293384
+  type: 'test'
+  ...
+# Subtest: aggregates transfers to recipient only
+ok 72 - aggregates transfers to recipient only
+  ---
+  duration_ms: 0.520627
+  type: 'test'
+  ...
+# Subtest: aggregates supported inner instructions once
+ok 73 - aggregates supported inner instructions once
+  ---
+  duration_ms: 0.4857
+  type: 'test'
+  ...
+# Subtest: malformed inner instruction groups {}
+ok 74 - malformed inner instruction groups {}
+  ---
+  duration_ms: 0.32752
+  type: 'test'
+  ...
+# Subtest: malformed inner instruction groups [null]
+ok 75 - malformed inner instruction groups [null]
+  ---
+  duration_ms: 0.258676
+  type: 'test'
+  ...
+# Subtest: malformed inner instruction groups [{"index":-1,"instructions":[]}]
+ok 76 - malformed inner instruction groups [{"index":-1,"instructions":[]}]
+  ---
+  duration_ms: 0.2493
+  type: 'test'
+  ...
+# Subtest: malformed inner instruction groups [{"index":1,"instructions":[]}]
+ok 77 - malformed inner instruction groups [{"index":1,"instructions":[]}]
+  ---
+  duration_ms: 0.236987
+  type: 'test'
+  ...
+# Subtest: malformed inner instruction groups [{"index":0,"instructions":null}]
+ok 78 - malformed inner instruction groups [{"index":0,"instructions":null}]
+  ---
+  duration_ms: 0.326891
+  type: 'test'
+  ...
+# Subtest: malformed inner instruction groups [{"index":0,"instructions":[]},{"index":0,"instructions":[{"program":"system","programId":"11111111111111111111111111111111","parsed":{"type":"transfer","info":{"source":"11111111111111111111111111111113","destination":"11111111111111111111111111111112","lamports":100}}}]}]
+ok 79 - malformed inner instruction groups [{"index":0,"instructions":[]},{"index":0,"instructions":[{"program":"system","programId":"11111111111111111111111111111111","parsed":{"type":"transfer","info":{"source":"11111111111111111111111111111113","destination":"11111111111111111111111111111112","lamports":100}}}]}]
+  ---
+  duration_ms: 0.248626
+  type: 'test'
+  ...
+# Subtest: exact amounts above Number safe integer range
+ok 80 - exact amounts above Number safe integer range
+  ---
+  duration_ms: 0.470838
+  type: 'test'
+  ...
+# Subtest: one lamport mismatch above safe integer range
+ok 81 - one lamport mismatch above safe integer range
+  ---
+  duration_ms: 0.346144
+  type: 'test'
+  ...
+# Subtest: invalid transfer amount 9007199254740992
+ok 82 - invalid transfer amount 9007199254740992
+  ---
+  duration_ms: 0.304552
+  type: 'test'
+  ...
+# Subtest: invalid transfer amount -1
+ok 83 - invalid transfer amount -1
+  ---
+  duration_ms: 0.249069
+  type: 'test'
+  ...
+# Subtest: invalid transfer amount 0.5
+ok 84 - invalid transfer amount 0.5
+  ---
+  duration_ms: 0.391125
+  type: 'test'
+  ...
+# Subtest: invalid transfer amount null
+ok 85 - invalid transfer amount null
+  ---
+  duration_ms: 0.164951
+  type: 'test'
+  ...
+# Subtest: invalid transfer amount true
+ok 86 - invalid transfer amount true
+  ---
+  duration_ms: 0.126431
+  type: 'test'
+  ...
+# Subtest: invalid transfer amount {}
+ok 87 - invalid transfer amount {}
+  ---
+  duration_ms: 0.123608
+  type: 'test'
+  ...
+# Subtest: invalid transfer amount []
+ok 88 - invalid transfer amount []
+  ---
+  duration_ms: 0.164378
+  type: 'test'
+  ...
+# Subtest: invalid transfer amount "1e2"
+ok 89 - invalid transfer amount "1e2"
+  ---
+  duration_ms: 0.140265
+  type: 'test'
+  ...
+# Subtest: invalid transfer amount "100.0"
+ok 90 - invalid transfer amount "100.0"
+  ---
+  duration_ms: 0.103153
+  type: 'test'
+  ...
+# Subtest: invalid transfer amount "+100"
+ok 91 - invalid transfer amount "+100"
+  ---
+  duration_ms: 0.108584
+  type: 'test'
+  ...
+# Subtest: invalid transfer amount " 100"
+ok 92 - invalid transfer amount " 100"
+  ---
+  duration_ms: 0.091278
+  type: 'test'
+  ...
+# Subtest: invalid transfer amount "0100"
+ok 93 - invalid transfer amount "0100"
+  ---
+  duration_ms: 0.092264
+  type: 'test'
+  ...
+# Subtest: invalid transfer amount "18446744073709551616"
+ok 94 - invalid transfer amount "18446744073709551616"
+  ---
+  duration_ms: 0.091894
+  type: 'test'
+  ...
+# Subtest: malformed top-level values null never throw
+ok 95 - malformed top-level values null never throw
+  ---
+  duration_ms: 0.13509
+  type: 'test'
+  ...
+# Subtest: malformed top-level values [] never throw
+ok 96 - malformed top-level values [] never throw
+  ---
+  duration_ms: 0.072197
+  type: 'test'
+  ...
+# Subtest: malformed top-level values 1 never throw
+ok 97 - malformed top-level values 1 never throw
+  ---
+  duration_ms: 0.065019
+  type: 'test'
+  ...
+# Subtest: malformed top-level values true never throw
+ok 98 - malformed top-level values true never throw
+  ---
+  duration_ms: 0.062848
+  type: 'test'
+  ...
+# Subtest: malformed top-level values "text" never throw
+ok 99 - malformed top-level values "text" never throw
+  ---
+  duration_ms: 0.0626
+  type: 'test'
+  ...
+# Subtest: malformed top-level values {} never throw
+ok 100 - malformed top-level values {} never throw
+  ---
+  duration_ms: 0.099221
+  type: 'test'
+  ...
+# Subtest: invalid invoice id  
+ok 101 - invalid invoice id  
+  ---
+  duration_ms: 0.09486
+  type: 'test'
+  ...
+# Subtest: invalid invoice recipient 00000000000000000000000000000000
+ok 102 - invalid invoice recipient 00000000000000000000000000000000
+  ---
+  duration_ms: 0.058371
+  type: 'test'
+  ...
+# Subtest: invalid invoice recipient 1111111111111111111111111111111
+ok 103 - invalid invoice recipient 1111111111111111111111111111111
+  ---
+  duration_ms: 0.056298
+  type: 'test'
+  ...
+# Subtest: invalid invoice recipient zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz
+ok 104 - invalid invoice recipient zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz
+  ---
+  duration_ms: 0.062809
+  type: 'test'
+  ...
+# Subtest: invalid invoice amountLamports 0
+ok 105 - invalid invoice amountLamports 0
+  ---
+  duration_ms: 0.054931
+  type: 'test'
+  ...
+# Subtest: invalid invoice amountLamports 01
+ok 106 - invalid invoice amountLamports 01
+  ---
+  duration_ms: 0.054116
+  type: 'test'
+  ...
+# Subtest: invalid invoice amountLamports 100
+ok 107 - invalid invoice amountLamports 100
+  ---
+  duration_ms: 0.056187
+  type: 'test'
+  ...
+# Subtest: invalid invoice notBefore -1
+ok 108 - invalid invoice notBefore -1
+  ---
+  duration_ms: 0.053992
+  type: 'test'
+  ...
+# Subtest: invalid invoice notBefore 100
+ok 109 - invalid invoice notBefore 100
+  ---
+  duration_ms: 0.057436
+  type: 'test'
+  ...
+# Subtest: invalid evidence source onchain
+ok 110 - invalid evidence source onchain
+  ---
+  duration_ms: 0.077293
+  type: 'test'
+  ...
+# Subtest: invalid evidence cluster custom
+ok 111 - invalid evidence cluster custom
+  ---
+  duration_ms: 0.056965
+  type: 'test'
+  ...
+# Subtest: invalid evidence signature 111111111111111111111111111111111111111111111111111111111111111
+ok 112 - invalid evidence signature 111111111111111111111111111111111111111111111111111111111111111
+  ---
+  duration_ms: 0.063496
+  type: 'test'
+  ...
+# Subtest: invalid evidence signature zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz
+ok 113 - invalid evidence signature zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz
+  ---
+  duration_ms: 0.095091
+  type: 'test'
+  ...
+# Subtest: invalid evidence signature 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+ok 114 - invalid evidence signature 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  ---
+  duration_ms: 0.068568
+  type: 'test'
+  ...
+# Subtest: invalid evidence fetchedAt yesterday
+ok 115 - invalid evidence fetchedAt yesterday
+  ---
+  duration_ms: 0.083007
+  type: 'test'
+  ...
+# Subtest: malformed transaction t => { t.meta = null; }
+ok 116 - malformed transaction t => { t.meta = null; }
+  ---
+  duration_ms: 0.140943
+  type: 'test'
+  ...
+# Subtest: malformed transaction t => { t.transaction = null; }
+ok 117 - malformed transaction t => { t.transaction = null; }
+  ---
+  duration_ms: 0.096917
+  type: 'test'
+  ...
+# Subtest: malformed transaction t => { t.transaction.message = []; }
+ok 118 - malformed transaction t => { t.transaction.message = []; }
+  ---
+  duration_ms: 0.129016
+  type: 'test'
+  ...
+# Subtest: malformed transaction t => { t.transaction.signatures = []; }
+ok 119 - malformed transaction t => { t.transaction.signatures = []; }
+  ---
+  duration_ms: 0.107388
+  type: 'test'
+  ...
+# Subtest: malformed transaction t => { t.slot = '1'; }
+ok 120 - malformed transaction t => { t.slot = '1'; }
+  ---
+  duration_ms: 0.09905
+  type: 'test'
+  ...
+# Subtest: malformed transaction t => { t.blockTime = 1.5; }
+ok 121 - malformed transaction t => { t.blockTime = 1.5; }
+  ---
+  duration_ms: 0.095428
+  type: 'test'
+  ...
+# Subtest: malformed transaction t => { t.transaction.message.instructions = {}; }
+ok 122 - malformed transaction t => { t.transaction.message.instructions = {}; }
+  ---
+  duration_ms: 0.128239
+  type: 'test'
+  ...
+# Subtest: null instruction
+ok 123 - null instruction
+  ---
+  duration_ms: 0.12169
+  type: 'test'
+  ...
+# Subtest: missing transfer info
+ok 124 - missing transfer info
+  ---
+  duration_ms: 0.133384
+  type: 'test'
+  ...
+# Subtest: invalid transfer source
+ok 125 - invalid transfer source
+  ---
+  duration_ms: 0.126017
+  type: 'test'
+  ...
+# Subtest: malformed ledger
+ok 126 - malformed ledger
+  ---
+  duration_ms: 0.078817
+  type: 'test'
+  ...
+# Subtest: malformed ledger entry
+ok 127 - malformed ledger entry
+  ---
+  duration_ms: 0.076507
+  type: 'test'
+  ...
+# Subtest: large untrusted inner arrays return review without argument-count exceptions
+ok 128 - large untrusted inner arrays return review without argument-count exceptions
+  ---
+  duration_ms: 13.177073
+  type: 'test'
+  ...
+# Subtest: allowlisted ancillary instruction alongside SOL transfer: ComputeBudget111111111111111111111111111111
+ok 129 - allowlisted ancillary instruction alongside SOL transfer: ComputeBudget111111111111111111111111111111
+  ---
+  duration_ms: 1.158532
+  type: 'test'
+  ...
+# Subtest: ancillary parsed transfer payload never counts as payment: ComputeBudget111111111111111111111111111111
+ok 130 - ancillary parsed transfer payload never counts as payment: ComputeBudget111111111111111111111111111111
+  ---
+  duration_ms: 0.268929
+  type: 'test'
+  ...
+# Subtest: ancillary instruction cannot hide unsafe transfer amount: ComputeBudget111111111111111111111111111111
+ok 131 - ancillary instruction cannot hide unsafe transfer amount: ComputeBudget111111111111111111111111111111
+  ---
+  duration_ms: 0.140909
+  type: 'test'
+  ...
+# Subtest: ancillary instruction cannot hide underpayment: ComputeBudget111111111111111111111111111111
+ok 132 - ancillary instruction cannot hide underpayment: ComputeBudget111111111111111111111111111111
+  ---
+  duration_ms: 0.308936
+  type: 'test'
+  ...
+# Subtest: allowlisted ancillary instruction alongside SOL transfer: MemoSq4gqABAXKb96qnH8TysNcWxMyWCqXgDLGmfcHr
+ok 133 - allowlisted ancillary instruction alongside SOL transfer: MemoSq4gqABAXKb96qnH8TysNcWxMyWCqXgDLGmfcHr
+  ---
+  duration_ms: 0.172882
+  type: 'test'
+  ...
+# Subtest: ancillary parsed transfer payload never counts as payment: MemoSq4gqABAXKb96qnH8TysNcWxMyWCqXgDLGmfcHr
+ok 134 - ancillary parsed transfer payload never counts as payment: MemoSq4gqABAXKb96qnH8TysNcWxMyWCqXgDLGmfcHr
+  ---
+  duration_ms: 0.086012
+  type: 'test'
+  ...
+# Subtest: ancillary instruction cannot hide unsafe transfer amount: MemoSq4gqABAXKb96qnH8TysNcWxMyWCqXgDLGmfcHr
+ok 135 - ancillary instruction cannot hide unsafe transfer amount: MemoSq4gqABAXKb96qnH8TysNcWxMyWCqXgDLGmfcHr
+  ---
+  duration_ms: 0.077777
+  type: 'test'
+  ...
+# Subtest: ancillary instruction cannot hide underpayment: MemoSq4gqABAXKb96qnH8TysNcWxMyWCqXgDLGmfcHr
+ok 136 - ancillary instruction cannot hide underpayment: MemoSq4gqABAXKb96qnH8TysNcWxMyWCqXgDLGmfcHr
+  ---
+  duration_ms: 0.077683
+  type: 'test'
+  ...
+# Subtest: compute-budget instructions and parsed memo coexist with exact SOL payment
+ok 137 - compute-budget instructions and parsed memo coexist with exact SOL payment
+  ---
+  duration_ms: 0.179069
+  type: 'test'
+  ...
+# Subtest: ancillary labels cannot exempt an unknown program
+ok 138 - ancillary labels cannot exempt an unknown program
+  ---
+  duration_ms: 0.131834
+  type: 'test'
+  ...
+# Subtest: near-match ancillary program id is not allowlisted
+ok 139 - near-match ancillary program id is not allowlisted
+  ---
+  duration_ms: 0.098439
+  type: 'test'
+  ...
+# Subtest: unsupported parent with inner SOL transfer: 11111111111111111111111111111114
+ok 140 - unsupported parent with inner SOL transfer: 11111111111111111111111111111114
+  ---
+  duration_ms: 0.142447
+  type: 'test'
+  ...
+# Subtest: unsupported inner program alongside valid SOL and ancillary instructions: 11111111111111111111111111111114
+ok 141 - unsupported inner program alongside valid SOL and ancillary instructions: 11111111111111111111111111111114
+  ---
+  duration_ms: 0.12485
+  type: 'test'
+  ...
+# Subtest: unsupported parent with inner SOL transfer: TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA
+ok 142 - unsupported parent with inner SOL transfer: TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA
+  ---
+  duration_ms: 0.078079
+  type: 'test'
+  ...
+# Subtest: unsupported inner program alongside valid SOL and ancillary instructions: TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA
+ok 143 - unsupported inner program alongside valid SOL and ancillary instructions: TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA
+  ---
+  duration_ms: 0.067754
+  type: 'test'
+  ...
+# Subtest: unsupported parent with inner SOL transfer: TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb
+ok 144 - unsupported parent with inner SOL transfer: TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb
+  ---
+  duration_ms: 0.070495
+  type: 'test'
+  ...
+# Subtest: unsupported inner program alongside valid SOL and ancillary instructions: TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb
+ok 145 - unsupported inner program alongside valid SOL and ancillary instructions: TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb
+  ---
+  duration_ms: 0.062024
+  type: 'test'
+  ...
+1..145
+# tests 145
+# suites 0
+# pass 145
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 334.772297

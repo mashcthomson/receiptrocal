@@ -1,4 +1,4 @@
-// ReceiptRail merchant demo: an x402-style paid endpoint on loopback.
+// Payment verification merchant demo: an x402-style paid endpoint on loopback.
 // x402-style only; NOT compatible with the x402 protocol or its headers.
 // Read-only: never creates keys, signs or sends payments. All state is in memory and resets on restart.
 import http from 'node:http';
@@ -10,6 +10,8 @@ import { fetchEvidence } from '../lib/rpc.mjs';
 import {
   DEFAULT_FIXTURE_PATH, RPC_ENDPOINTS, LIMITATIONS, createLedger, failure, isBase58Bytes, loadFixtures, validateInvoice,
 } from './mcp.mjs';
+
+const PRODUCT_NAME = 'Receiptrocal';
 
 export const DEFAULT_PORT = 4319;
 export const PAID_PATH = '/api/paid/report';
@@ -178,7 +180,7 @@ export function createMerchant(config, { verify = verifyPayment, fetcher = fetch
       }
       const pathname = new URL(req.url, `http://${host}`).pathname;
       if (req.method === 'GET' && pathname === '/api/health') {
-        return send(res, 200, { ok: true, name: 'ReceiptRail merchant demo', mode: config.mode, cluster: config.cluster, statefulness: 'in-memory, resets on restart' });
+        return send(res, 200, { ok: true, name: `${PRODUCT_NAME} merchant demo`, mode: config.mode, cluster: config.cluster, statefulness: 'in-memory, resets on restart' });
       }
       if (pathname === PAID_PATH) {
         if (req.method !== 'GET') throw httpError('METHOD_NOT_ALLOWED', 'Use GET.', 405);
@@ -279,7 +281,7 @@ if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.ur
     server.on('error', error => { log(`server error: ${error.message}`); process.exitCode = 1; });
     server.listen(args.walkthrough ? 0 : args.port, '127.0.0.1', async () => {
       const base = `http://127.0.0.1:${server.address().port}`;
-      console.log(`ReceiptRail merchant demo (${config.mode === 'demo' ? 'SYNTHETIC FIXTURES' : `LIVE RPC ${config.cluster}`}): ${base}${PAID_PATH}`);
+      console.log(`${PRODUCT_NAME} merchant demo (${config.mode === 'demo' ? 'SYNTHETIC FIXTURES' : `LIVE RPC ${config.cluster}`}): ${base}${PAID_PATH}`);
       console.log('x402-style, not x402 protocol compatible. Read-only: never signs or sends payments. State is in memory and resets on restart.');
       if (args.walkthrough) {
         try {

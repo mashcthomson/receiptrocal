@@ -11,7 +11,7 @@ const appDirectory = path.dirname(fileURLToPath(import.meta.url));
 const fixturePath = path.join(appDirectory, "fixtures", "demo.json");
 
 const limitations = [
-  "ReceiptRail is read-only and does not move funds.",
+  "Receiptrocal is read-only and does not move funds.",
   "Fixture results are synthetic and are not onchain verification.",
   "Live results rely on the selected Solana RPC provider.",
   "The CLI does not preserve duplicate-signature state across invocations."

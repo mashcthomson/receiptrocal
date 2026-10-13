@@ -1,5 +1,7 @@
-// ReceiptRail browser desk. Buildless ESM, no dependencies.
+// Payment verification browser desk. Buildless ESM, no dependencies.
 // The server is the authority for verdicts. This file never fabricates a match.
+
+const PRODUCT_NAME = 'Receiptrocal';
 
 const SYSTEM_PROGRAM = '11111111111111111111111111111111';
 const BASE58 = /^[1-9A-HJ-NP-Za-km-z]+$/;
@@ -13,10 +15,10 @@ const DEFAULT_LIMITATIONS = [
 ];
 
 const STATUS_COPY = {
-  matched: { label: 'Matched', line: 'This transaction settles the invoice.' },
-  mismatch: { label: 'Mismatch', line: 'This transaction does not settle the invoice.' },
-  duplicate: { label: 'Duplicate', line: 'This signature already settled a different invoice.' },
-  needs_review: { label: 'Needs review', line: 'ReceiptRail cannot decide automatically. Inspect by hand.' },
+  matched: { label: 'Matched', title: 'Payment matched', icon: 'check', line: 'This transaction settles the invoice.' },
+  mismatch: { label: 'Mismatch', title: 'Payment mismatch', icon: 'cross', line: 'This transaction does not settle the invoice.' },
+  duplicate: { label: 'Duplicate', title: 'Receipt already used', icon: 'repeat', line: 'This signature already settled a different invoice.' },
+  needs_review: { label: 'Needs review', title: 'Needs review', icon: 'review', line: 'The evidence needs a manual check before this invoice can be settled.' },
 };
 
 const MODE_COPY = {
@@ -53,6 +55,30 @@ function el(tag, attrs = {}, ...children) {
     node.append(child instanceof Node ? child : document.createTextNode(String(child)));
   }
   return node;
+}
+
+// Local, decorative SVGs. Status text carries the accessible meaning.
+function icon(name) {
+  const paths = {
+    check: 'm5 12 4 4L19 6',
+    cross: 'm6 6 12 12M6 18 18 6',
+    repeat: 'M5 8h11l-3-3m3 3-3 3M19 16H8l3 3m-3-3 3-3',
+    review: 'M12 7v6m0 4h.01M12 3 2 21h20L12 3Z',
+    receipt: 'M6 3h12v18l-3-2-3 2-3-2-3 2V3Zm3 5h6m-6 4h6',
+  };
+  const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+  for (const [key, value] of Object.entries({ viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', 'stroke-width': '1.6', 'stroke-linecap': 'round', 'stroke-linejoin': 'round', 'aria-hidden': 'true' })) svg.setAttribute(key, value);
+  const path = document.createElementNS(svg.namespaceURI, 'path');
+  path.setAttribute('d', paths[name] || paths.review);
+  svg.append(path);
+  return svg;
+}
+
+function revealResult() {
+  if (!window.matchMedia('(max-width: 800px)').matches) return;
+  const heading = $('#result-heading');
+  heading.focus({ preventScroll: true });
+  heading.closest('.col-result').scrollIntoView({ behavior: 'auto', block: 'start' });
 }
 
 export function lamportsToSol(value) {
@@ -135,7 +161,7 @@ async function api(path, { method = 'GET', body } = {}) {
     });
   } catch (error) {
     if (error.name === 'AbortError') throw new ApiError('TIMEOUT', `No response from the local server within ${REQUEST_TIMEOUT_MS / 1000} seconds.`);
-    throw new ApiError('NETWORK', 'Cannot reach the local ReceiptRail server. Is it still running?');
+    throw new ApiError('NETWORK', `Cannot reach the local ${PRODUCT_NAME} server. Is it still running?`);
   } finally {
     clearTimeout(timer);
   }
@@ -167,6 +193,10 @@ function setMode(mode, { focus = false } = {}) {
   // Never leave a receipt from the other mode on screen without its own banner.
   if (state.current && state.current.mode !== mode) renderPlaceholder();
   else if (state.current) renderResult(state.current);
+  else renderPlaceholder();
+  const back = $('.back-to-input');
+  back.href = mode === 'demo' ? '#panel-demo' : '#panel-live';
+  back.textContent = mode === 'demo' ? 'Back to cases' : 'Back to payment details';
 }
 
 function initTabs() {
@@ -218,6 +248,7 @@ async function loadDemo() {
 }
 
 function renderDemoRows() {
+  const focusedCase = document.activeElement?.closest('[data-case]')?.dataset.case;
   const rows = state.cases.map(item => {
     const inv = item.invoice || {};
     const outcome = state.demoResults.get(item.id);
@@ -236,7 +267,7 @@ function renderDemoRows() {
       el('th', { scope: 'row', 'data-label': 'Case' },
         el('button', {
           class: 'row-btn', type: 'button', 'aria-pressed': String(selected),
-          onclick: () => runDemoCase(item.id),
+          onclick: () => runDemoCase(item.id, { reveal: true }),
         }, el('span', { class: 'row-title' }, item.title || item.id), el('span', { class: 'row-id mono' }, item.id))),
       el('td', { 'data-label': 'Invoice', class: 'mono' }, inv.id || ''),
       el('td', { 'data-label': 'Recipient', class: 'mono', title: inv.recipient || '' }, short(inv.recipient || '', 4, 4)),
@@ -246,10 +277,14 @@ function renderDemoRows() {
     );
   });
   $('#demo-rows').replaceChildren(...(rows.length ? rows : [el('tr', {}, el('td', { colspan: 6, class: 'muted' }, 'No demo cases found.'))]));
+  if (focusedCase) $(`[data-case="${CSS.escape(focusedCase)}"] .row-btn`)?.focus({ preventScroll: true });
 }
 
-async function runDemoCase(caseId, { show = true } = {}) {
-  if (show) state.selectedCase = caseId;
+async function runDemoCase(caseId, { show = true, reveal = false } = {}) {
+  if (show) {
+    state.selectedCase = caseId;
+    if (state.mode === 'demo') renderPlaceholder('Checking the synthetic fixture…');
+  }
   state.demoResults.set(caseId, { pending: true });
   renderDemoRows();
   clearError('#demo-error');
@@ -270,14 +305,15 @@ async function runDemoCase(caseId, { show = true } = {}) {
       checkedAt: new Date().toISOString(),
     };
     state.demoResults.set(caseId, { result: payload.result, record });
-    if (show && state.mode === 'demo') {
+    if (show && state.mode === 'demo' && state.selectedCase === caseId) {
       state.current = record;
       renderResult(record);
+      if (reveal) revealResult();
     }
   } catch (error) {
     state.demoResults.set(caseId, { error });
     renderError('#demo-error', error, `Demo case "${caseId}" failed.`);
-    if (show && state.current?.caseId === caseId) renderPlaceholder();
+    if (show && state.selectedCase === caseId && state.mode === 'demo') renderPlaceholder('The fixture check failed. See the error beside the case list.', 'No verdict recorded.');
   }
   renderDemoRows();
 }
@@ -286,11 +322,15 @@ async function runAllDemo() {
   const button = $('#demo-run-all');
   button.disabled = true;
   try {
-    for (const item of state.cases) await runDemoCase(item.id, { show: false });
+    for (const [index, item] of state.cases.entries()) {
+      button.textContent = `Running ${index + 1} / ${state.cases.length}`;
+      await runDemoCase(item.id, { show: false });
+    }
     const first = state.selectedCase || state.cases[0]?.id;
-    if (first) await runDemoCase(first);
+    if (first) await runDemoCase(first, { reveal: true });
   } finally {
     button.disabled = false;
+    button.textContent = 'Run all cases';
   }
 }
 
@@ -357,6 +397,7 @@ async function submitLive(event) {
   const ledger = readLedger();
   const key = `${cluster}:${signature}`;
   if (ledger[key] && ledger[key] !== invoice.id) {
+    renderPlaceholder('This receipt was already used. See the duplicate warning beside the form.', 'Receipt already used.');
     renderError('#live-error',
       new ApiError('BROWSER_DUPLICATE', `This signature already settled invoice "${ledger[key]}" in this browser session on ${cluster}.`),
       'Duplicate receipt blocked locally.');
@@ -365,6 +406,7 @@ async function submitLive(event) {
   }
 
   const button = $('#live-submit');
+  renderPlaceholder('Reading finalized evidence from the selected Solana RPC endpoint…');
   state.busy = true;
   button.disabled = true;
   button.textContent = 'Querying RPC...';
@@ -389,11 +431,12 @@ async function submitLive(event) {
     if (state.mode === 'live') {
       state.current = record;
       renderResult(record);
+      revealResult();
     }
   } catch (error) {
     renderError('#live-error', error, 'Live check failed.');
     addLiveRun({ invoice, signature, cluster, status: 'error', note: error.code });
-    if (state.current?.mode === 'live') renderPlaceholder();
+    if (state.mode === 'live') renderPlaceholder('The live check failed. See the RPC error beside the form. No payment verdict was produced.', 'No verdict recorded.');
   } finally {
     state.busy = false;
     button.disabled = false;
@@ -423,12 +466,19 @@ function addLiveRun(run) {
 
 // ---------- receipt rendering ----------
 
-function renderPlaceholder() {
+function renderPlaceholder(message, title = 'Waiting for a verdict.') {
   state.current = null;
   $('#result').replaceChildren(el('div', { class: 'placeholder' },
-    el('p', {}, state.mode === 'demo'
-      ? 'Choose a demo case to inspect its synthetic receipt.'
-      : 'Enter an invoice and a signature, then verify against RPC.')));
+    el('div', { class: 'placeholder-icon' }, icon('receipt')),
+    el('h3', {}, message ? title : 'Clarity starts with the evidence.'),
+    el('p', {}, message || (state.mode === 'demo'
+      ? 'Choose a synthetic case to see exactly why a payment matches, fails, or needs a closer look.'
+      : 'Enter an invoice and transaction signature to check finalized, read-only Solana data.')),
+    el('ol', { class: 'placeholder-steps' },
+      el('li', {}, el('span', {}, '01'), el('div', {}, el('strong', {}, 'Compare the payment'), el('p', {}, 'Recipient, amount, execution and previous use.'))),
+      el('li', {}, el('span', {}, '02'), el('div', {}, el('strong', {}, 'Understand the decision'), el('p', {}, 'A clear verdict, with the reasons behind it.'))),
+      el('li', {}, el('span', {}, '03'), el('div', {}, el('strong', {}, 'Keep the evidence'), el('p', {}, 'Inspect and download the full evidence JSON.'))),
+    )));
 }
 
 function extractInstructions(tx) {
@@ -496,8 +546,10 @@ function renderResult(record) {
   const tx = record.evidence?.transaction ?? null;
 
   const header = el('div', { class: `verdict verdict-${copy ? r.status : 'unknown'}` },
-    statusBadge(r.status, 'badge-lg'),
+    el('span', { class: 'verdict-icon' }, icon(copy?.icon)),
     el('div', {},
+      el('p', { class: 'verdict-kicker' }, record.mode === 'demo' ? 'Synthetic demo verdict' : 'Live RPC verdict'),
+      el('h3', { class: 'verdict-title' }, copy?.title || 'Unknown result'),
       el('p', { class: 'verdict-line' }, copy?.line || 'Unrecognized status from server.'),
       el('p', { class: 'verdict-code mono' }, r.code || '')),
   );
@@ -536,12 +588,12 @@ function renderResult(record) {
         el('caption', { class: 'sr-only' }, 'Instructions found in the transaction'),
         el('thead', {}, el('tr', {}, ['Ix', 'Program', 'Type', 'From', 'To', 'Lamports'].map(h => el('th', { scope: 'col' }, h)))),
         el('tbody', {}, instructions.map(ix => el('tr', { class: ix.system && /^transfer/.test(ix.type) ? 'ix-transfer' : '' },
-          el('td', { class: 'mono' }, ix.where),
-          el('td', {}, ix.program),
-          el('td', { class: 'mono' }, ix.type),
-          el('td', { class: 'mono', title: ix.source || '' }, ix.source ? short(ix.source, 4, 4) : ''),
-          el('td', { class: `mono ${ix.destination && ix.destination === (r.recipient || inv.recipient) ? 'hit' : ''}`, title: ix.destination || '' }, ix.destination ? short(ix.destination, 4, 4) : ''),
-          el('td', { class: 'mono num' }, ix.lamports ? groupDigits(ix.lamports) : ''),
+          el('td', { class: 'mono', 'data-label': 'Instruction' }, ix.where),
+          el('td', { 'data-label': 'Program' }, ix.program),
+          el('td', { class: 'mono', 'data-label': 'Type' }, ix.type),
+          el('td', { class: 'mono', 'data-label': 'From', title: ix.source || '' }, ix.source ? short(ix.source, 4, 4) : ''),
+          el('td', { class: `mono ${ix.destination && ix.destination === (r.recipient || inv.recipient) ? 'hit' : ''}`, 'data-label': 'To', title: ix.destination || '' }, ix.destination ? short(ix.destination, 4, 4) : ''),
+          el('td', { class: 'mono num', 'data-label': 'Lamports' }, ix.lamports ? groupDigits(ix.lamports) : ''),
         )))))
     : el('p', { class: 'muted' }, tx ? 'No instructions in evidence.' : 'No transaction in evidence (not found, or unavailable).');
 
@@ -561,11 +613,11 @@ function renderResult(record) {
     provenance(record),
     header,
     amounts,
-    el('h3', {}, 'Reasons'),
+    el('h3', {}, 'Why this verdict'),
     reasons,
-    el('h3', {}, 'Details'),
+    el('h3', {}, 'Receipt details'),
     facts,
-    el('h3', {}, 'Evidence'),
+    el('h3', {}, 'Transaction evidence'),
     txMeta,
     ixTable,
     el('p', { class: 'small muted' }, 'Highlighted rows are System Program transfers. The verdict above comes from the server verifier, not this table.'),
@@ -584,7 +636,7 @@ function renderLimitations() {
 function exportRecord(record) {
   const synthetic = record.mode === 'demo' || record.evidence?.source === 'fixture';
   return {
-    tool: 'ReceiptRail',
+    tool: PRODUCT_NAME,
     format: 'receiptrail-evidence/v1',
     exportedAt: new Date().toISOString(),
     mode: record.mode,
@@ -605,7 +657,7 @@ function downloadRecord(record) {
   const blob = new Blob([JSON.stringify(data, null, 2) + '\n'], { type: 'application/json' });
   const url = URL.createObjectURL(blob);
   const safeId = String(record.invoice?.id || 'invoice').replace(/[^A-Za-z0-9._-]+/g, '_').slice(0, 60);
-  const a = el('a', { href: url, download: `receiptrail-${data.synthetic ? 'DEMO-' : ''}${safeId}.json` });
+  const a = el('a', { href: url, download: `${PRODUCT_NAME.toLowerCase()}-${data.synthetic ? 'DEMO-' : ''}${safeId}.json` });
   document.body.append(a);
   a.click();
   a.remove();
@@ -615,6 +667,8 @@ function downloadRecord(record) {
 // ---------- boot ----------
 
 function init() {
+  document.title = PRODUCT_NAME;
+  document.querySelectorAll('[data-product-name]').forEach(node => { node.textContent = PRODUCT_NAME; });
   const logo = document.querySelector('[data-logo]');
   logo?.addEventListener('error', () => logo.remove());
   initTabs();
