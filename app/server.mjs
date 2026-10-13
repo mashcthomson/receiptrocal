@@ -138,6 +138,8 @@ export function createApp({ fetcher = fetchEvidence, fixturePath = resolve(root,
           '/app.js': ['app.js', 'text/javascript; charset=utf-8'],
           '/style.css': ['style.css', 'text/css; charset=utf-8'],
           '/logo.svg': ['logo.svg', 'image/svg+xml'],
+          '/media/presentation.mp4': ['media/presentation.mp4', 'video/mp4'],
+          '/media/demo.mp4': ['media/demo.mp4', 'video/mp4'],
         };
         const asset = files[pathname];
         if (asset) {
